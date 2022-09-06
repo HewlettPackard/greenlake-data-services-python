@@ -1,0 +1,57 @@
+# NimblePoolDetails
+
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**all_flash** | **bool, none_type** | Indicate whether the pool is an all_flash pool. | [optional] 
+**array_count** | **int, none_type** | Number of arrays in the pool. | [optional] 
+**array_list** | [**[NimbleArrayDetail], none_type**](NimbleArrayDetail.md) | List of arrays in the pool with detailed information. When create/update array list, only arrays&#39; id is required. | [optional] 
+**associated_links** | [**AssociatedLinks**](AssociatedLinks.md) |  | [optional] 
+**cache_capacity** | **int, none_type** | Total usable cache capacity of the pool in bytes. | [optional] 
+**capacity** | **int, none_type** | Total storage space of the pool in bytes. | [optional] 
+**clone_ratio** | **float, none_type** | Clone savings for the pool expressed as ratio. Fraction expressed as floating point number. | [optional] 
+**compression_ratio** | **float, none_type** | Compression savings for the pool expressed as ratio. Fraction expressed as floating point number. | [optional] 
+**console_uri** | **str, none_type** | consoleUri for detailed storage object | [optional] 
+**creation_time** | **int, none_type** | Time when this pool was created. Seconds since last epoch i.e. 00:00 January 1, 1970. | [optional] 
+**customer_id** | **str, none_type** | customerId | [optional] 
+**data_reduction_ratio** | **float, none_type** | Space usage savings in the pool expressed as ratio that does not include thin-provisioning savings. Fraction expressed as floating point number. | [optional] 
+**dedupe_all_volumes** | **bool, none_type** | Indicates if dedupe is enabled by default for new volumes on this pool. | [optional] 
+**dedupe_capable** | **bool, none_type** | Indicates whether the pool is capable of hosting deduped volumes. | [optional] 
+**dedupe_capacity_bytes** | **int, none_type** | The dedupe capacity of a hybrid pool. Does not apply to all-flash pools. | [optional] 
+**dedupe_ratio** | **float, none_type** | Dedupe savings for the pool expressed as ratio. Fraction expressed as floating point number. | [optional] 
+**dedupe_usage_bytes** | **int, none_type** | The dedupe usage of a hybrid pool. Does not apply to all-flash pools. | [optional] 
+**description** | **str, none_type** | Text description of pool. String of up to 255 printable ASCII characters. | [optional] 
+**folder_list** | [**[NimbleFolderSummary], none_type**](NimbleFolderSummary.md) | The list of fully qualified names of folders in the pool. | [optional] 
+**free_space** | **int, none_type** | Free space of the pool in bytes. | [optional] 
+**full_name** | **str, none_type** | Fully qualified name of pool. String of up to 64 alphanumeric characters, - and . and : are allowed after first character. | [optional] 
+**generation** | **int, none_type** | generation | [optional] 
+**is_default** | **bool, none_type** | Indicates if this is the default pool. | [optional] 
+**last_modified** | **int, none_type** | Time when this pool was last modified. Seconds since last epoch i.e. 00:00 January 1, 1970. | [optional] 
+**pinnable_cache_capacity** | **int, none_type** | Total pinnable cache capacity of the pool in bytes. | [optional] 
+**pinned_cache_capacity** | **int, none_type** | Total pinned cache capacity of the pool in bytes. | [optional] 
+**pinned_vol_list** | [**[NimblePinnedVolumeInfo], none_type**](NimblePinnedVolumeInfo.md) | The list of pinned volumes in the pool. | [optional] 
+**resource_uri** | **str, none_type** | Link to the object URI | [optional] 
+**savings** | **int, none_type** | Overall space usage savings in the pool. | [optional] 
+**savings_clone** | **int, none_type** | Space usage savings in the pool due to cloning of volumes. | [optional] 
+**savings_compression** | **int, none_type** | Space usage savings in the pool due to compression. | [optional] 
+**savings_data_reduction** | **int, none_type** | Space usage savings in the pool that does not include thin-provisioning savings. | [optional] 
+**savings_dedupe** | **int, none_type** | Space usage savings in the pool due to deduplication. | [optional] 
+**savings_ratio** | **float, none_type** | Overall space usage savings in the pool expressed as ratio. Fraction expressed as floating point number. | [optional] 
+**savings_vol_thin_provisioning** | **int, none_type** | Space usage savings in the pool due to thin provisioning of volumes. | [optional] 
+**search_name** | **str, none_type** | Name of pool used for object search. Alphanumeric string, up to 64 characters including hyphen, period, colon. | [optional] 
+**snap_count** | **int, none_type** | Snapshot count. | [optional] 
+**snapcoll_count** | **int, none_type** | Snapshot collection count. | [optional] 
+**type** | **str, none_type** | type | [optional] 
+**unassigned_array_list** | [**[NimbleArrSummary], none_type**](NimbleArrSummary.md) | List of arrays being unassigned from the pool. | [optional] 
+**unused_reserve** | **int, none_type** | Unused reserve space of the pool in bytes. | [optional] 
+**usage** | **int, none_type** | Used space of the pool in bytes. | [optional] 
+**usage_valid** | **bool, none_type** | Identifier of pool. A 42 digit hexadecimal number. | [optional] 
+**vol_count** | **int, none_type** | Number of volumes assigned to the pool. | [optional] 
+**vol_list** | [**[NimbleVolumeSummary], none_type**](NimbleVolumeSummary.md) | The list of volumes in the pool. | [optional] 
+**vol_thin_provisioning_ratio** | **float, none_type** | Thin provisioning savings for volumes in the pool expressed as ratio. Fraction expressed as floating point number. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
