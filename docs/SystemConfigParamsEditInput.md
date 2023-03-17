@@ -1,20 +1,18 @@
 # SystemConfigParamsEditInput
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_mode** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
-**date_time** | **str, none_type** | system date time | [optional] 
-**installation_sites** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
-**name** | **str, none_type** | system name | [optional] 
-**ntp_addresses** | **[str, none_type], none_type** | system ntp addresses | [optional] 
-**remote_syslog_settings** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
-**srinfo** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
+**auth_mode** | **object** |  | [optional] 
+**date_time** | **str** | system date time | [optional] 
+**installation_sites** | **object** |  | [optional] 
+**name** | **str** | system name | [optional] 
+**ntp_addresses** | **list[str]** | system ntp addresses | [optional] 
+**remote_syslog_settings** | **object** |  | [optional] 
+**srinfo** | **object** |  | [optional] 
 **support_contact** | [**ContactsEditDetails**](ContactsEditDetails.md) |  | [optional] 
-**system_parameters** | **bool, date, datetime, dict, float, int, list, str, none_type** |  | [optional] 
-**timezone** | **str, none_type** | system time zone | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**system_parameters** | **object** |  | [optional] 
+**timezone** | **str** | system time zone | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

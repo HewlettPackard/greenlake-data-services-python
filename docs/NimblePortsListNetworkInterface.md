@@ -1,12 +1,10 @@
 # NimblePortsListNetworkInterface
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | **[bool, date, datetime, dict, float, int, list, str, none_type], none_type** |  | [optional] 
-**total** | **int, none_type** | Total number of network interface ports. | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**items** | [**list[NetworkInterfaceFilterableFields]**](NetworkInterfaceFilterableFields.md) |  | [optional] 
+**total** | **int** | Total number of network interface ports. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

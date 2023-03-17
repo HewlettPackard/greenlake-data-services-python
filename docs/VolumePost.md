@@ -1,16 +1,14 @@
 # VolumePost
 
-
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**comment** | **str** | Comment if any | [optional] 
+**custom_name** | **str** | Name for snapshot | [optional] 
+**expire_secs** | **int** | Expiration time in seconds | [optional] 
 **name_pattern** | [**NamePattern**](NamePattern.md) |  | 
-**comment** | **str, none_type** | Comment if any | [optional] 
-**custom_name** | **str, none_type** | Name for snapshot | [optional] 
-**expire_secs** | **int, none_type** | Expiration time in seconds | [optional] 
-**read_only** | **bool, none_type** | Read only or Read/Write | [optional] 
-**retain_secs** | **int, none_type** | Reatain time in seconds | [optional] 
-**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+**read_only** | **bool** | Read only or Read/Write | [optional] 
+**retain_secs** | **int** | Reatain time in seconds | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
