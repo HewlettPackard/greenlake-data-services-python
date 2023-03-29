@@ -1,12 +1,15 @@
 # DiskPositionNow
 
+Disk Position Now
+
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cage** | **int** | cage ID | [optional] 
-**disk** | **int** | disk ID | [optional] 
-**side** | **str** | disk side | [optional] 
-**sled** | **int** | sled ID | [optional] 
+**cage** | **int, none_type** | cage ID | [optional] 
+**disk** | **int, none_type** | disk ID | [optional] 
+**side** | **str, none_type** | disk side | [optional] 
+**sled** | **int, none_type** | sled ID | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

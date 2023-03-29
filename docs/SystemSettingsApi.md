@@ -1,4 +1,4 @@
-# greenlake-data-services.SystemSettingsApi
+# greenlake_data_services.SystemSettingsApi
 
 All URIs are relative to *https://eu1.data.cloud.hpe.com*
 
@@ -92,37 +92,62 @@ Add trusted certificates for storage system Primera / Alletra 9K identified by {
 Add trusted certificates for storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.add_trusted_certificate_input import AddTrustedCertificateInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-add_trusted_certificate_input = greenlake-data-services.AddTrustedCertificateInput() # AddTrustedCertificateInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add trusted certificates for storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.add_trusted_certificates(system_id, add_trusted_certificate_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->add_trusted_certificates: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    add_trusted_certificate_input = AddTrustedCertificateInput(
+        action="VERIFY_CERT_CHAIN",
+        parameters=TrustedCertParams(
+            certificates="----BEGIN CERTIFICATE -----abc----END CERTIFICATE -----",
+            type="other",
+        ),
+    ) # AddTrustedCertificateInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add trusted certificates for storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.add_trusted_certificates(system_id, add_trusted_certificate_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->add_trusted_certificates: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **add_trusted_certificate_input** | [**AddTrustedCertificateInput**](AddTrustedCertificateInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **add_trusted_certificate_input** | [**AddTrustedCertificateInput**](AddTrustedCertificateInput.md)|  |
 
 ### Return type
 
@@ -136,6 +161,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -147,37 +185,73 @@ Add Alert/Mail contact details
 Add Alert/Mail contact details
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.alert_contact_input import AlertContactInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-alert_contact_input = greenlake-data-services.AlertContactInput() # AlertContactInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add Alert/Mail contact details
-    api_response = api_instance.alert_contacts_create(system_id, alert_contact_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->alert_contacts_create: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    alert_contact_input = AlertContactInput(
+        company="HPE",
+        company_code="HPE",
+        country="US",
+        fax="fax_id",
+        first_name="john",
+        include_svc_alerts=False,
+        last_name="kevin",
+        notification_severities=[0,1,2,3,4,5],
+        preferred_language="en",
+        primary_email="kevin.john@hpe.com",
+        primary_phone="98783456",
+        receive_email=True,
+        receive_grouped=True,
+        secondary_email="winny.pooh@hpe.com",
+        secondary_phone="23456789",
+    ) # AlertContactInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add Alert/Mail contact details
+        api_response = api_instance.alert_contacts_create(system_id, alert_contact_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->alert_contacts_create: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **alert_contact_input** | [**AlertContactInput**](AlertContactInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **alert_contact_input** | [**AlertContactInput**](AlertContactInput.md)|  |
 
 ### Return type
 
@@ -192,6 +266,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **alert_contacts_delete**
@@ -202,37 +290,56 @@ Delete Alert/Email contact of storage system Primera / Alletra 9K identified by 
 Delete Alert/Email contact of storage system Primera / Alletra 9K identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | Unique Identifier of the alert contact
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete Alert/Email contact of storage system Primera / Alletra 9K identified by {id}
-    api_response = api_instance.alert_contacts_delete(system_id, id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->alert_contacts_delete: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "a4c78226-69cd-b9e7-af3e-445ca8f8a655" # str | Unique Identifier of the alert contact
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete Alert/Email contact of storage system Primera / Alletra 9K identified by {id}
+        api_response = api_instance.alert_contacts_delete(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->alert_contacts_delete: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| Unique Identifier of the alert contact | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| Unique Identifier of the alert contact |
 
 ### Return type
 
@@ -247,6 +354,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **alert_contacts_update**
@@ -257,39 +378,75 @@ Edit Alert/Email contact details of storage system Primera / Alletra 9K identifi
 Edit Alert/Email contact details of storage system Primera / Alletra 9K identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.alert_contact_input import AlertContactInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | Unique Identifier of the alert contact
-alert_contact_input = greenlake-data-services.AlertContactInput() # AlertContactInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit Alert/Email contact details of storage system Primera / Alletra 9K identified by {id}
-    api_response = api_instance.alert_contacts_update(system_id, id, alert_contact_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->alert_contacts_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "a4c78226-69cd-b9e7-af3e-445ca8f8a655" # str | Unique Identifier of the alert contact
+    alert_contact_input = AlertContactInput(
+        company="HPE",
+        company_code="HPE",
+        country="US",
+        fax="fax_id",
+        first_name="john",
+        include_svc_alerts=False,
+        last_name="kevin",
+        notification_severities=[0,1,2,3,4,5],
+        preferred_language="en",
+        primary_email="kevin.john@hpe.com",
+        primary_phone="98783456",
+        receive_email=True,
+        receive_grouped=True,
+        secondary_email="winny.pooh@hpe.com",
+        secondary_phone="23456789",
+    ) # AlertContactInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit Alert/Email contact details of storage system Primera / Alletra 9K identified by {id}
+        api_response = api_instance.alert_contacts_update(system_id, id, alert_contact_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->alert_contacts_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| Unique Identifier of the alert contact | 
- **alert_contact_input** | [**AlertContactInput**](AlertContactInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| Unique Identifier of the alert contact |
+ **alert_contact_input** | [**AlertContactInput**](AlertContactInput.md)|  |
 
 ### Return type
 
@@ -304,49 +461,91 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_alert_contacts_get_by_id**
-> AlertContactsDetailsList device_type1_alert_contacts_get_by_id(system_id, id, select=select)
+> AlertContactsDetailsList device_type1_alert_contacts_get_by_id(system_id, id)
 
 Get alert-contact details for a storage system Primera / Alletra 9K identified by {id}
 
 Get alert-contact details for a storage system Primera / Alletra 9K identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.alert_contacts_details_list import AlertContactsDetailsList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | Unique Identifier of the alert contact
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get alert-contact details for a storage system Primera / Alletra 9K identified by {id}
-    api_response = api_instance.device_type1_alert_contacts_get_by_id(system_id, id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "a4c78226-69cd-b9e7-af3e-445ca8f8a655" # str | Unique Identifier of the alert contact
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get alert-contact details for a storage system Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_alert_contacts_get_by_id(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get alert-contact details for a storage system Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_alert_contacts_get_by_id(system_id, id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| Unique Identifier of the alert contact | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| Unique Identifier of the alert contact |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -361,51 +560,92 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_alert_contacts_list**
-> AlertContacts device_type1_alert_contacts_list(system_id, limit=limit, offset=offset, select=select)
+> AlertContacts device_type1_alert_contacts_list(system_id)
 
 Get alert-contact details for a storage system Primera / Alletra 9K
 
 Get alert-contact details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.alert_contacts import AlertContacts
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get alert-contact details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_alert_contacts_list(system_id, limit=limit, offset=offset, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get alert-contact details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_alert_contacts_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get alert-contact details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_alert_contacts_list(system_id, limit=limit, offset=offset, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_alert_contacts_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -420,49 +660,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_certificates_get_by_id**
-> CertificateDetails device_type1_certificates_get_by_id(system_id, id, select=select)
+> CertificateDetails device_type1_certificates_get_by_id(system_id, id)
 
 Get array certificates by Primera / Alletra 9K identified by {id}
 
 Get array certificates by Primera / Alletra 9K identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.certificate_details import CertificateDetails
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the certificate
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get array certificates by Primera / Alletra 9K identified by {id}
-    api_response = api_instance.device_type1_certificates_get_by_id(system_id, id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_certificates_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "99691e493067b2b2acf1774fc0ccc011" # str | ID of the certificate
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get array certificates by Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_certificates_get_by_id(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_certificates_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get array certificates by Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_certificates_get_by_id(system_id, id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_certificates_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the certificate | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the certificate |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -477,53 +758,95 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_certificates_list**
-> CertificatesSummaryList device_type1_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
+> CertificatesSummaryList device_type1_certificates_list(system_id)
 
 Get array certificates by Primera / Alletra 9K
 
 Get array certificates by Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.certificates_summary_list import CertificatesSummaryList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter Certificates by Key. (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get array certificates by Primera / Alletra 9K
-    api_response = api_instance.device_type1_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_certificates_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "service eq qw-client" # str | Lucene query to filter Certificates by Key. (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get array certificates by Primera / Alletra 9K
+        api_response = api_instance.device_type1_certificates_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_certificates_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get array certificates by Primera / Alletra 9K
+        api_response = api_instance.device_type1_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_certificates_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter Certificates by Key. | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter Certificates by Key. | [optional]
 
 ### Return type
 
@@ -538,6 +861,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_delete_quorum_witness**
@@ -548,37 +885,55 @@ Delete quorum witness identified by {replicationPartnerId} on storage system Pri
 Delete quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-replication_partner_id = 'replication_partner_id_example' # str | id of device-type1 replication partner
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_delete_quorum_witness(system_id, replication_partner_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_delete_quorum_witness: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    replication_partner_id = "aedec7d11d02f73611a6ff992c256bdb" # str | id of device-type1 replication partner
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_delete_quorum_witness(system_id, replication_partner_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_delete_quorum_witness: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **replication_partner_id** | **str**| id of device-type1 replication partner | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **replication_partner_id** | **str**| id of device-type1 replication partner |
 
 ### Return type
 
@@ -592,6 +947,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -603,37 +971,55 @@ Delete vcenter setting identified by {vcenterSettingId} on storage system Primer
 Delete vcenter setting identified by {vcenterSettingId} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-vcenter_setting_id = 'vcenter_setting_id_example' # str | UID(vcenterSettingId) of the storage system
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete vcenter setting identified by {vcenterSettingId} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_delete_v_center_settings(system_id, vcenter_setting_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_delete_v_center_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    vcenter_setting_id = "7e92269a-12d1-35b4-60e8-5919edfc5475" # str | UID(vcenterSettingId) of the storage system
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete vcenter setting identified by {vcenterSettingId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_delete_v_center_settings(system_id, vcenter_setting_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_delete_v_center_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system |
 
 ### Return type
 
@@ -648,55 +1034,95 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_get_quorum_witness**
-> WitnessList device_type1_get_quorum_witness(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+> WitnessList device_type1_get_quorum_witness(system_id)
 
 Get quorum witness configuration details from storage system Primera / Alletra 9K identified by {systemId}
 
 Get quorum witness configuration details from storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.witness_list import WitnessList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | oData query to filter witness by key. (optional)
-sort = 'sort_example' # str | oData query to sort witness resource by key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get quorum witness configuration details from storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_get_quorum_witness(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "id eq afb4961e47212e5bc88dd35db5be5c83" # str | oData query to filter witness by key. (optional)
+    sort = "id desc" # str | oData query to sort witness resource by key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get quorum witness configuration details from storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_quorum_witness(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get quorum witness configuration details from storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_quorum_witness(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| oData query to filter witness by key. | [optional] 
- **sort** | **str**| oData query to sort witness resource by key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| oData query to filter witness by key. | [optional]
+ **sort** | **str**| oData query to sort witness resource by key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -711,49 +1137,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_get_quorum_witness_with_id**
-> WitnessDetails device_type1_get_quorum_witness_with_id(system_id, replication_partner_id, select=select)
+> WitnessDetails device_type1_get_quorum_witness_with_id(system_id, replication_partner_id)
 
 Get details of quorum witness configured on replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 Get details of quorum witness configured on replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.witness_details import WitnessDetails
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-replication_partner_id = 'replication_partner_id_example' # str | id of device-type1 replication partner
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of quorum witness configured on replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_get_quorum_witness_with_id(system_id, replication_partner_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness_with_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    replication_partner_id = "aedec7d11d02f73611a6ff992c256bdb" # str | id of device-type1 replication partner
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of quorum witness configured on replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_quorum_witness_with_id(system_id, replication_partner_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness_with_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of quorum witness configured on replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_quorum_witness_with_id(system_id, replication_partner_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_quorum_witness_with_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **replication_partner_id** | **str**| id of device-type1 replication partner | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **replication_partner_id** | **str**| id of device-type1 replication partner |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -768,49 +1235,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_get_replication_partner_with_id**
-> ReplicationPartnerDetails device_type1_get_replication_partner_with_id(system_id, replication_partner_id, select=select)
+> ReplicationPartnerDetails device_type1_get_replication_partner_with_id(system_id, replication_partner_id)
 
 Get details of replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 Get details of replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.replication_partner_details import ReplicationPartnerDetails
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-replication_partner_id = 'replication_partner_id_example' # str | id of device-type1 replication partner
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_get_replication_partner_with_id(system_id, replication_partner_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_get_replication_partner_with_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    replication_partner_id = "aedec7d11d02f73611a6ff992c256bdb" # str | id of device-type1 replication partner
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_replication_partner_with_id(system_id, replication_partner_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_replication_partner_with_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of replication partner identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_replication_partner_with_id(system_id, replication_partner_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_replication_partner_with_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **replication_partner_id** | **str**| id of device-type1 replication partner | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **replication_partner_id** | **str**| id of device-type1 replication partner |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -825,57 +1333,99 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**304** | Not Modified |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_get_replication_partners**
-> ReplicationPartnersList device_type1_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
+> ReplicationPartnersList device_type1_get_replication_partners(system_id)
 
 Get details of replication partners on storage system Primera / Alletra 9K identified by {systemId}
 
 Get details of replication partners on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.replication_partners_list import ReplicationPartnersList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | oData query to filter replication partners by key. (optional)
-sort = 'sort_example' # str | oData query to sort nodes resource by key. (optional)
-include_indirect_partners = True # bool | Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of replication partners on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_get_replication_partners: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "systemId eq 7CE751P312" # str | oData query to filter replication partners by key. (optional)
+    sort = "systemId desc" # str | oData query to sort nodes resource by key. (optional)
+    include_indirect_partners = True # bool | Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of replication partners on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_replication_partners(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_replication_partners: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of replication partners on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_get_replication_partners: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| oData query to filter replication partners by key. | [optional] 
- **sort** | **str**| oData query to sort nodes resource by key. | [optional] 
- **include_indirect_partners** | **bool**| Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| oData query to filter replication partners by key. | [optional]
+ **sort** | **str**| oData query to sort nodes resource by key. | [optional]
+ **include_indirect_partners** | **bool**| Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -890,47 +1440,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**304** | Not Modified |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_mail_settings_get**
-> Mailsettings device_type1_mail_settings_get(system_id, select=select)
+> Mailsettings device_type1_mail_settings_get(system_id)
 
 Get the system's SMTP/Mail server settigs
 
 Get the system's SMTP/Mail server settigs
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.mailsettings import Mailsettings
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get the system's SMTP/Mail server settigs
-    api_response = api_instance.device_type1_mail_settings_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_mail_settings_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get the system's SMTP/Mail server settigs
+        api_response = api_instance.device_type1_mail_settings_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_mail_settings_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get the system's SMTP/Mail server settigs
+        api_response = api_instance.device_type1_mail_settings_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_mail_settings_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -945,47 +1538,89 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  * ETag - Current entity tag for the selected resource <br>  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_network_service_cim_get**
-> NetworkServicesCim device_type1_network_service_cim_get(system_id, select=select)
+> NetworkServicesCim device_type1_network_service_cim_get(system_id)
 
 Get CIM Network-Service details for a storage system Primera / Alletra 9K
 
 Get CIM Network-Service details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.network_services_cim import NetworkServicesCim
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get CIM Network-Service details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_network_service_cim_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_service_cim_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get CIM Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_cim_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_cim_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get CIM Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_cim_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_cim_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1000,49 +1635,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_network_service_snmp_mgr_get_by_id**
-> NetworkServicesSnmp device_type1_network_service_snmp_mgr_get_by_id(system_id, id, select=select)
+> NetworkServicesSnmp device_type1_network_service_snmp_mgr_get_by_id(system_id, id)
 
 Get a specific SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
 
 Get a specific SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.network_services_snmp import NetworkServicesSnmp
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the SNMP manager
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get a specific SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_network_service_snmp_mgr_get_by_id(system_id, id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "e9d353bf98fc1a6bdb90b824e3ca14b5" # str | ID of the SNMP manager
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get a specific SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_snmp_mgr_get_by_id(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get a specific SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_snmp_mgr_get_by_id(system_id, id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the SNMP manager | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the SNMP manager |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1056,52 +1732,94 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | SNMP Manager object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_network_service_snmp_mgr_list**
-> NetworkServicesSnmp device_type1_network_service_snmp_mgr_list(system_id, limit=limit, offset=offset, select=select)
+> NetworkServicesSnmp device_type1_network_service_snmp_mgr_list(system_id)
 
 Get SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
 
 Get SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.network_services_snmp import NetworkServicesSnmp
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_network_service_snmp_mgr_list(system_id, limit=limit, offset=offset, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_snmp_mgr_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get SNMP-Manager Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_snmp_mgr_list(system_id, limit=limit, offset=offset, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_snmp_mgr_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1115,6 +1833,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1126,39 +1857,61 @@ Configures vasa service for the specified id.
 Enables or disable vasa service  on a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.vasa_config import VasaConfig
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-vasa_id = 'vasa_id_example' # str | ID of the VASA service
-vasa_config = greenlake-data-services.VasaConfig() # VasaConfig | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Configures vasa service for the specified id.
-    api_response = api_instance.device_type1_network_service_vasa_configure(system_id, vasa_id, vasa_config)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_service_vasa_configure: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    vasa_id = "a9c455bf98fc1a6bdb90b824e3ac20b8" # str | ID of the VASA service
+    vasa_config = VasaConfig(
+        action="START",
+    ) # VasaConfig | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Configures vasa service for the specified id.
+        api_response = api_instance.device_type1_network_service_vasa_configure(system_id, vasa_id, vasa_config)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_vasa_configure: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **vasa_id** | **str**| ID of the VASA service | 
- **vasa_config** | [**VasaConfig**](VasaConfig.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **vasa_id** | **str**| ID of the VASA service |
+ **vasa_config** | [**VasaConfig**](VasaConfig.md)|  |
 
 ### Return type
 
@@ -1173,47 +1926,89 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_network_service_vasa_get**
-> NetworkServicesVasa device_type1_network_service_vasa_get(system_id, select=select)
+> NetworkServicesVasa device_type1_network_service_vasa_get(system_id)
 
 Get VASA Network-Service details for a storage system Primera / Alletra 9K
 
 Get VASA Network-Service details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.network_services_vasa import NetworkServicesVasa
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get VASA Network-Service details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_network_service_vasa_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_service_vasa_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get VASA Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_vasa_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_vasa_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get VASA Network-Service details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_service_vasa_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_service_vasa_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1228,47 +2023,88 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_network_settings_get**
-> NetworkSettings device_type1_network_settings_get(system_id, select=select)
+> NetworkSettings device_type1_network_settings_get(system_id)
 
 Get Network-Settings details for a storage system Primera / Alletra 9K
 
 Get Network-Settings details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.network_settings import NetworkSettings
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get Network-Settings details for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_network_settings_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_network_settings_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get Network-Settings details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_settings_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_settings_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get Network-Settings details for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_network_settings_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_network_settings_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1283,55 +2119,96 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_node_service_ports_get_by_id**
-> ServicePortsList device_type1_node_service_ports_get_by_id(node_id, system_id, limit=limit, offset=offset, filter=filter, select=select)
+> ServicePortsList device_type1_node_service_ports_get_by_id(node_id, system_id)
 
 Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId} and {nodeId }
 
 Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId} and {nodeId }
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.service_ports_list import ServicePortsList
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-node_id = 'node_id_example' # str | Primary ID of the node
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | oData query to filter systems by Key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId} and {nodeId }
-    api_response = api_instance.device_type1_node_service_ports_get_by_id(node_id, system_id, limit=limit, offset=offset, filter=filter, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    node_id = "e9d353bf98fc1a6bdb90b824e3ca14b5" # str | Primary ID of the node
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "ipv4address eq "169.254.77.160"" # str | oData query to filter systems by Key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId} and {nodeId }
+        api_response = api_instance.device_type1_node_service_ports_get_by_id(node_id, system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId} and {nodeId }
+        api_response = api_instance.device_type1_node_service_ports_get_by_id(node_id, system_id, limit=limit, offset=offset, filter=filter, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **node_id** | **str**| Primary ID of the node | 
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| oData query to filter systems by Key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **node_id** | **str**| Primary ID of the node |
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| oData query to filter systems by Key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1345,54 +2222,95 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_node_service_ports_list**
-> ServicePortsList device_type1_node_service_ports_list(system_id, limit=limit, offset=offset, filter=filter, select=select)
+> ServicePortsList device_type1_node_service_ports_list(system_id)
 
 Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId}
 
 Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.service_ports_list import ServicePortsList
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | oData query to filter systems by Key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_node_service_ports_list(system_id, limit=limit, offset=offset, filter=filter, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "ipv4address eq "169.254.77.160"" # str | oData query to filter systems by Key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_node_service_ports_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get service ports for nodes of all storage systems of Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_node_service_ports_list(system_id, limit=limit, offset=offset, filter=filter, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_node_service_ports_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| oData query to filter systems by Key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| oData query to filter systems by Key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1406,6 +2324,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1417,37 +2348,66 @@ Create quorum witness on storage system Primera / Alletra 9K identified by {syst
 Create quorum witness on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.create_quorum_witness_input import CreateQuorumWitnessInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-create_quorum_witness_input = greenlake-data-services.CreateQuorumWitnessInput() # CreateQuorumWitnessInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create quorum witness on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_post_quorum_witness(system_id, create_quorum_witness_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_post_quorum_witness: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    create_quorum_witness_input = CreateQuorumWitnessInput(
+        parameters=CreateQuorumWitnessInputParameters(
+            ip_address="15.112.47.239",
+            port=8843,
+            ssl=True,
+        ),
+        replication_partner_system_id="7CE816P0SR",
+        src_replication_id="afb4961e47212e5bc88dd35db5be5c83",
+        start_quorum_witness=True,
+        target_replication_id="afb4961e47212e5bc88dd35db5be5c83",
+    ) # CreateQuorumWitnessInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create quorum witness on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_post_quorum_witness(system_id, create_quorum_witness_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_post_quorum_witness: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **create_quorum_witness_input** | [**CreateQuorumWitnessInput**](CreateQuorumWitnessInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **create_quorum_witness_input** | [**CreateQuorumWitnessInput**](CreateQuorumWitnessInput.md)|  |
 
 ### Return type
 
@@ -1461,6 +2421,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1472,37 +2445,64 @@ Delete replication partner from storage system Primera / Alletra 9K identified b
 Delete replication partner from storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.remove_replication_partners_input import RemoveReplicationPartnersInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-remove_replication_partners_input = greenlake-data-services.RemoveReplicationPartnersInput() # RemoveReplicationPartnersInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete replication partner from storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_post_remove_replication_partners(system_id, remove_replication_partners_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_post_remove_replication_partners: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    remove_replication_partners_input = RemoveReplicationPartnersInput(
+        replication_partners=[
+            RemoveRemoteCopyTargetInput(
+                replication_partner_system_id="7CE816P0SR",
+                src_replication_id="afb4961e47212e5bc88dd35db5be5c83",
+                target_replication_id="afb4961e47212e5bc88dd35db5be5c83",
+            ),
+        ],
+    ) # RemoveReplicationPartnersInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete replication partner from storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_post_remove_replication_partners(system_id, remove_replication_partners_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_post_remove_replication_partners: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **remove_replication_partners_input** | [**RemoveReplicationPartnersInput**](RemoveReplicationPartnersInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **remove_replication_partners_input** | [**RemoveReplicationPartnersInput**](RemoveReplicationPartnersInput.md)|  |
 
 ### Return type
 
@@ -1516,6 +2516,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1527,37 +2540,94 @@ Create replication partners on Primera / Alletra 9K identified by {systemId}
 Create replication partners on Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.create_replication_partners_input import CreateReplicationPartnersInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-create_replication_partners_input = greenlake-data-services.CreateReplicationPartnersInput() # CreateReplicationPartnersInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create replication partners on Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_post_replication_partners(system_id, create_replication_partners_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_post_replication_partners: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    create_replication_partners_input = CreateReplicationPartnersInput(
+        replication_partners=[
+            ReplicationPartnerInput(
+                replication_partner_system_id="replication_partner_system_id_example",
+                source=CreateRemoteCopyTargetInput(
+                    disabled=True,
+                    name="sample_RCtarget",
+                    node_wwn="2FF70002AC020DA1",
+                    port_pos_and_link=[
+                        PortPosAndLinkInput(
+                            link="10.100.65.128",
+                            port_position=PortPositionInput(
+                                node=0,
+                                port=3,
+                                slot=1,
+                            ),
+                        ),
+                    ],
+                    type=1,
+                ),
+                target=CreateRemoteCopyTargetInput(
+                    disabled=True,
+                    name="sample_RCtarget",
+                    node_wwn="2FF70002AC020DA1",
+                    port_pos_and_link=[
+                        PortPosAndLinkInput(
+                            link="10.100.65.128",
+                            port_position=PortPositionInput(
+                                node=0,
+                                port=3,
+                                slot=1,
+                            ),
+                        ),
+                    ],
+                    type=1,
+                ),
+            ),
+        ],
+    ) # CreateReplicationPartnersInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create replication partners on Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_post_replication_partners(system_id, create_replication_partners_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_post_replication_partners: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **create_replication_partners_input** | [**CreateReplicationPartnersInput**](CreateReplicationPartnersInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **create_replication_partners_input** | [**CreateReplicationPartnersInput**](CreateReplicationPartnersInput.md)|  |
 
 ### Return type
 
@@ -1571,6 +2641,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1582,37 +2665,68 @@ Add vCenter settings to storage system Primera / Alletra 9K
 Add vCenter settings to storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.v_center_settings_input import VCenterSettingsInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-v_center_settings_input = greenlake-data-services.VCenterSettingsInput() # VCenterSettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add vCenter settings to storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_post_v_center_settings(system_id, v_center_settings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_post_v_center_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    v_center_settings_input = VCenterSettingsInput(
+        cert_chain_pem='''-----BEGIN CERTIFICATE-----
+MIID2jCCAsKgAwIBAgIJAOiAEUfqLBfBMA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD
+-----END CERTIFICATE-----
+''',
+        description="vCenter - dataCenter1",
+        inetaddress="15.71.130.25",
+        name="dataCenter1",
+        password="pass",
+        port=443,
+        username="user1",
+    ) # VCenterSettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add vCenter settings to storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_post_v_center_settings(system_id, v_center_settings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_post_v_center_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **v_center_settings_input** | [**VCenterSettingsInput**](VCenterSettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **v_center_settings_input** | [**VCenterSettingsInput**](VCenterSettingsInput.md)|  |
 
 ### Return type
 
@@ -1626,6 +2740,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1637,39 +2765,62 @@ Edit quorum witness identified by {replicationPartnerId} on storage system Prime
 Edit quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.edit_quorum_witness_input import EditQuorumWitnessInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-replication_partner_id = 'replication_partner_id_example' # str | id of device-type1 replication partner
-edit_quorum_witness_input = greenlake-data-services.EditQuorumWitnessInput() # EditQuorumWitnessInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_put_quorum_witness(system_id, replication_partner_id, edit_quorum_witness_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_put_quorum_witness: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    replication_partner_id = "aedec7d11d02f73611a6ff992c256bdb" # str | id of device-type1 replication partner
+    edit_quorum_witness_input = EditQuorumWitnessInput(
+        replication_partner_system_id="7CE816P0SR",
+        start_quorum_witness=True,
+        target_replication_id="afb4961e47212e5bc88dd35db5be5c83",
+    ) # EditQuorumWitnessInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit quorum witness identified by {replicationPartnerId} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_put_quorum_witness(system_id, replication_partner_id, edit_quorum_witness_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_put_quorum_witness: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **replication_partner_id** | **str**| id of device-type1 replication partner | 
- **edit_quorum_witness_input** | [**EditQuorumWitnessInput**](EditQuorumWitnessInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **replication_partner_id** | **str**| id of device-type1 replication partner |
+ **edit_quorum_witness_input** | [**EditQuorumWitnessInput**](EditQuorumWitnessInput.md)|  |
 
 ### Return type
 
@@ -1683,6 +2834,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1694,39 +2858,99 @@ Edit replication partner identified by {replicationPartnerId} on Primera / Allet
 Edit replication partner identified by {replicationPartnerId} on Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.edit_replication_partner_input import EditReplicationPartnerInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-replication_partner_id = 'replication_partner_id_example' # str | id of device-type1 replication partner
-edit_replication_partner_input = greenlake-data-services.EditReplicationPartnerInput() # EditReplicationPartnerInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit replication partner identified by {replicationPartnerId} on Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_put_replication_partner(system_id, replication_partner_id, edit_replication_partner_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_put_replication_partner: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    replication_partner_id = "aedec7d11d02f73611a6ff992c256bdb" # str | id of device-type1 replication partner
+    edit_replication_partner_input = EditReplicationPartnerInput(
+        add_rc_links=AddRemoteCopyLinks(
+            replication_partner_system_id="7CE816P0SR",
+            source=[
+                CreateRemoteCopyLinkInput(
+                    address="10.100.65.128",
+                    port_pos=CreateRemoteCopyLinkInputPortPos(
+                        node=0,
+                        port=3,
+                        slot=1,
+                    ),
+                    target_name="Sample_RCTarget",
+                    type=1,
+                ),
+            ],
+            target=[
+                CreateRemoteCopyLinkInput(
+                    address="10.100.65.128",
+                    port_pos=CreateRemoteCopyLinkInputPortPos(
+                        node=0,
+                        port=3,
+                        slot=1,
+                    ),
+                    target_name="Sample_RCTarget",
+                    type=1,
+                ),
+            ],
+        ),
+        remove_rc_links=RemoveRemoteCopyLinksInput(
+            replication_partner_system_id="7CE816P0SR",
+            source=[
+                RCLinkId(
+                    rc_link_id="afb4961e47212e5bc88dd35db5be5c82",
+                ),
+            ],
+            target=[
+                RCLinkId(
+                    rc_link_id="afb4961e47212e5bc88dd35db5be5c82",
+                ),
+            ],
+        ),
+    ) # EditReplicationPartnerInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit replication partner identified by {replicationPartnerId} on Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_put_replication_partner(system_id, replication_partner_id, edit_replication_partner_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_put_replication_partner: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **replication_partner_id** | **str**| id of device-type1 replication partner | 
- **edit_replication_partner_input** | [**EditReplicationPartnerInput**](EditReplicationPartnerInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **replication_partner_id** | **str**| id of device-type1 replication partner |
+ **edit_replication_partner_input** | [**EditReplicationPartnerInput**](EditReplicationPartnerInput.md)|  |
 
 ### Return type
 
@@ -1740,6 +2964,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1751,39 +2988,69 @@ Edit vCenter setting identified by {vcenterSettingId} on Primera / Alletra 9K id
 Edit vCenter setting identified by {vcenterSettingId} on Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.edit_v_center_settings_input import EditVCenterSettingsInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-vcenter_setting_id = 'vcenter_setting_id_example' # str | UID(vcenterSettingId) of the storage system
-edit_v_center_settings_input = greenlake-data-services.EditVCenterSettingsInput() # EditVCenterSettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit vCenter setting identified by {vcenterSettingId} on Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.device_type1_put_v_center_settings(system_id, vcenter_setting_id, edit_v_center_settings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_put_v_center_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    vcenter_setting_id = "7e92269a-12d1-35b4-60e8-5919edfc5475" # str | UID(vcenterSettingId) of the storage system
+    edit_v_center_settings_input = EditVCenterSettingsInput(
+        cert_chain_pem='''-----BEGIN CERTIFICATE-----
+MIID2jCCAsKgAwIBAgIJAOiAEUfqLBfBMA0GCSqGSIb3DQEBCwUAMIGQMQswCQYD
+-----END CERTIFICATE-----
+''',
+        description="vCenter - dataCenter1",
+        inetaddress="15.71.130.25",
+        name="dataCenter1",
+        password="pass",
+        port=443,
+        username="user1",
+    ) # EditVCenterSettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit vCenter setting identified by {vcenterSettingId} on Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.device_type1_put_v_center_settings(system_id, vcenter_setting_id, edit_v_center_settings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_put_v_center_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system | 
- **edit_v_center_settings_input** | [**EditVCenterSettingsInput**](EditVCenterSettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system |
+ **edit_v_center_settings_input** | [**EditVCenterSettingsInput**](EditVCenterSettingsInput.md)|  |
 
 ### Return type
 
@@ -1797,48 +3064,88 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_support_data_collect**
-> TaskResponse device_type1_support_data_collect(system_id, collect_support_data_input)
+> TaskResponse device_type1_support_data_collect(system_id, collect_support_data_array_input)
 
 Trigger a collection on the storage system Primera / Alletra 9K
 
 Trigger a collection on the storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.collect_support_data_array_input import CollectSupportDataArrayInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-collect_support_data_input = NULL # list[CollectSupportDataInput] | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Trigger a collection on the storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_support_data_collect(system_id, collect_support_data_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_support_data_collect: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    collect_support_data_array_input = CollectSupportDataArrayInput([
+        CollectSupportDataInput(
+            action="PERFCOLLECTION",
+            options=[
+                "options_example",
+            ],
+        ),
+    ]) # CollectSupportDataArrayInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Trigger a collection on the storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_support_data_collect(system_id, collect_support_data_array_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_support_data_collect: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **collect_support_data_input** | [**list[CollectSupportDataInput]**](list.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **collect_support_data_array_input** | [**CollectSupportDataArrayInput**](CollectSupportDataArrayInput.md)|  |
 
 ### Return type
 
@@ -1853,47 +3160,89 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_support_settings_get**
-> SupportSetting device_type1_support_settings_get(system_id, select=select)
+> SupportSetting device_type1_support_settings_get(system_id)
 
 Get support settings for a storage system Primera / Alletra 9K
 
 Get support settings for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.support_setting import SupportSetting
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get support settings for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_support_settings_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_support_settings_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get support settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_support_settings_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_support_settings_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get support settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_support_settings_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_support_settings_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1908,47 +3257,88 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_system_settings_list**
-> SystemConfigParams device_type1_system_settings_list(system_id, select=select)
+> SystemConfigParams device_type1_system_settings_list(system_id)
 
 Get the system settings configuration details
 
 Get the system settings configuration details
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.system_config_params import SystemConfigParams
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get the system settings configuration details
-    api_response = api_instance.device_type1_system_settings_list(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_system_settings_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get the system settings configuration details
+        api_response = api_instance.device_type1_system_settings_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_system_settings_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get the system settings configuration details
+        api_response = api_instance.device_type1_system_settings_list(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_system_settings_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -1963,47 +3353,89 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  * ETag - Current entity tag for the selected resource <br>  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_telemetry_get**
-> TelemetryStatus device_type1_telemetry_get(system_id, select=select)
+> TelemetryStatus device_type1_telemetry_get(system_id)
 
 Get telemetry status for a storage system Primera / Alletra 9K
 
 Get telemetry status for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.telemetry_status import TelemetryStatus
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get telemetry status for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_telemetry_get(system_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_telemetry_get: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get telemetry status for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_telemetry_get(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_telemetry_get: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get telemetry status for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_telemetry_get(system_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_telemetry_get: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2018,49 +3450,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_trusted_certificates_get_by_id**
-> TrustedCertificateDetails device_type1_trusted_certificates_get_by_id(system_id, id, select=select)
+> TrustedCertificateDetails device_type1_trusted_certificates_get_by_id(system_id, id)
 
 Get certificates trusted by Primera / Alletra 9K identified by {id}
 
 Get certificates trusted by Primera / Alletra 9K identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.trusted_certificate_details import TrustedCertificateDetails
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the certificate
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get certificates trusted by Primera / Alletra 9K identified by {id}
-    api_response = api_instance.device_type1_trusted_certificates_get_by_id(system_id, id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "99691e493067b2b2acf1774fc0ccc011" # str | ID of the certificate
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get certificates trusted by Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_trusted_certificates_get_by_id(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get certificates trusted by Primera / Alletra 9K identified by {id}
+        api_response = api_instance.device_type1_trusted_certificates_get_by_id(system_id, id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the certificate | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the certificate |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2075,53 +3548,95 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_trusted_certificates_list**
-> TrustedCertificatesSummaryList device_type1_trusted_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
+> TrustedCertificatesSummaryList device_type1_trusted_certificates_list(system_id)
 
 Get certificates trusted by Primera / Alletra 9K
 
 Get certificates trusted by Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.trusted_certificates_summary_list import TrustedCertificatesSummaryList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter Certificates by Key. (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get certificates trusted by Primera / Alletra 9K
-    api_response = api_instance.device_type1_trusted_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "other" # str | Lucene query to filter Certificates by Key. (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get certificates trusted by Primera / Alletra 9K
+        api_response = api_instance.device_type1_trusted_certificates_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get certificates trusted by Primera / Alletra 9K
+        api_response = api_instance.device_type1_trusted_certificates_list(system_id, select=select, limit=limit, offset=offset, filter=filter)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_trusted_certificates_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter Certificates by Key. | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter Certificates by Key. | [optional]
 
 ### Return type
 
@@ -2136,49 +3651,91 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_vm_manager_settings_get_by_id**
-> VcenterSettingDetail device_type1_vm_manager_settings_get_by_id(system_id, vcenter_setting_id, select=select)
+> VcenterSettingDetail device_type1_vm_manager_settings_get_by_id(system_id, vcenter_setting_id)
 
 Get vcenter setting detail for a given vcenter setting of a storage system Primera / Alletra 9K
 
 Get vcenter setting detail for a given vcenter setting of a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.vcenter_setting_detail import VcenterSettingDetail
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-vcenter_setting_id = 'vcenter_setting_id_example' # str | UID(vcenterSettingId) of the storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get vcenter setting detail for a given vcenter setting of a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_vm_manager_settings_get_by_id(system_id, vcenter_setting_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_get_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    vcenter_setting_id = "7e92269a-12d1-35b4-60e8-5919edfc5475" # str | UID(vcenterSettingId) of the storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get vcenter setting detail for a given vcenter setting of a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_vm_manager_settings_get_by_id(system_id, vcenter_setting_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_get_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get vcenter setting detail for a given vcenter setting of a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_vm_manager_settings_get_by_id(system_id, vcenter_setting_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_get_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **vcenter_setting_id** | **str**| UID(vcenterSettingId) of the storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2193,51 +3750,92 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type1_vm_manager_settings_list**
-> VcenterSettingsSumarryList device_type1_vm_manager_settings_list(system_id, select=select, limit=limit, offset=offset)
+> VcenterSettingsSumarryList device_type1_vm_manager_settings_list(system_id)
 
 Get vcenter settings for a storage system Primera / Alletra 9K
 
 Get vcenter settings for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.vcenter_settings_sumarry_list import VcenterSettingsSumarryList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get vcenter settings for a storage system Primera / Alletra 9K
-    api_response = api_instance.device_type1_vm_manager_settings_list(system_id, select=select, limit=limit, offset=offset)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_list: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get vcenter settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_vm_manager_settings_list(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_list: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get vcenter settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.device_type1_vm_manager_settings_list(system_id, select=select, limit=limit, offset=offset)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type1_vm_manager_settings_list: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
 
 ### Return type
 
@@ -2252,6 +3850,19 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_application_server_create**
@@ -2262,37 +3873,70 @@ Create Nimble / Alletra 6K application server in system identified by {systemId}
 Create Nimble / Alletra 6K application server in system identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.create_application_server import CreateApplicationServer
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-create_application_server = greenlake-data-services.CreateApplicationServer() # CreateApplicationServer | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create Nimble / Alletra 6K application server in system identified by {systemId}
-    api_response = api_instance.device_type2_application_server_create(system_id, create_application_server)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_application_server_create: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    create_application_server = CreateApplicationServer(
+        description="99.9999% availability",
+        hostname="nimble-appserver.com",
+        metadata=[
+            AppKeyValue(
+                key="key1",
+                value="value1",
+            ),
+        ],
+        name="AppServer101",
+        port=1048,
+        server_type="vmware",
+        username="user256",
+    ) # CreateApplicationServer | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create Nimble / Alletra 6K application server in system identified by {systemId}
+        api_response = api_instance.device_type2_application_server_create(system_id, create_application_server)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_application_server_create: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **create_application_server** | [**CreateApplicationServer**](CreateApplicationServer.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **create_application_server** | [**CreateApplicationServer**](CreateApplicationServer.md)|  |
 
 ### Return type
 
@@ -2306,6 +3950,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2317,39 +3974,72 @@ Modify Nimble / Alletra 6K application server in system identified by {systemId}
 Modify Nimble / Alletra 6K application server in system identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.edit_application_server import EditApplicationServer
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-application_server_id = 'application_server_id_example' # str | Identifier of application server. A 42 digit hexadecimal number.
-edit_application_server = greenlake-data-services.EditApplicationServer() # EditApplicationServer | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Modify Nimble / Alletra 6K application server in system identified by {systemId}
-    api_response = api_instance.device_type2_application_server_edit(system_id, application_server_id, edit_application_server)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_application_server_edit: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    application_server_id = "2a0df0fe6f7dc7bb16000000000000000000000007" # str | Identifier of application server. A 42 digit hexadecimal number.
+    edit_application_server = EditApplicationServer(
+        description="99.9999% availability",
+        hostname="nimble-appserver.com",
+        metadata=[
+            AppKeyValue(
+                key="key1",
+                value="value1",
+            ),
+        ],
+        name="AppServer101",
+        port=1048,
+        server_type="vmware",
+        username="user256",
+    ) # EditApplicationServer | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Modify Nimble / Alletra 6K application server in system identified by {systemId}
+        api_response = api_instance.device_type2_application_server_edit(system_id, application_server_id, edit_application_server)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_application_server_edit: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. | 
- **edit_application_server** | [**EditApplicationServer**](EditApplicationServer.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. |
+ **edit_application_server** | [**EditApplicationServer**](EditApplicationServer.md)|  |
 
 ### Return type
 
@@ -2363,6 +4053,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2374,37 +4077,91 @@ Create replication partner pair for Nimble / Alletra 6K
 Create replication partner pair for Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.nimble_create_replication_partner_input import NimbleCreateReplicationPartnerInput
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-nimble_create_replication_partner_input = greenlake-data-services.NimbleCreateReplicationPartnerInput() # NimbleCreateReplicationPartnerInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create replication partner pair for Nimble / Alletra 6K
-    api_response = api_instance.device_type2_create_replication_partners(system_id, nimble_create_replication_partner_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_create_replication_partners: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    nimble_create_replication_partner_input = NimbleCreateReplicationPartnerInput(
+        replication_partners=[
+            ReplicationPartnerObj(
+                control_port=1024,
+                data_port=1024,
+                description="99.9999% availability",
+                repl_hostname="15.213.204.121",
+                source=Source(
+                    hostname="15.213.204.163",
+                    name="replicationPartner1",
+                    subnet_label="myobject-5",
+                    subnet_type="mgmt",
+                ),
+                subnet_label="myobject-5",
+                subnet_type="mgmt",
+                target=Target(
+                    hostname="15.213.204.164",
+                    name="replicationPartner2",
+                    subnet_label="myobject-5",
+                    subnet_type="mgmt",
+                ),
+                target_system_id="005319ed73385876a4000000000000000000000001",
+                throttles=[
+                    ReplicationThrottle(
+                        days="example day",
+                        description="Throttle one",
+                        name="Throttle1",
+                        thr_at_time=10800,
+                        thr_bandwidth=14,
+                        thr_until_time=14400,
+                    ),
+                ],
+            ),
+        ],
+    ) # NimbleCreateReplicationPartnerInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create replication partner pair for Nimble / Alletra 6K
+        api_response = api_instance.device_type2_create_replication_partners(system_id, nimble_create_replication_partner_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_create_replication_partners: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **nimble_create_replication_partner_input** | [**NimbleCreateReplicationPartnerInput**](NimbleCreateReplicationPartnerInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **nimble_create_replication_partner_input** | [**NimbleCreateReplicationPartnerInput**](NimbleCreateReplicationPartnerInput.md)|  |
 
 ### Return type
 
@@ -2418,6 +4175,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2429,37 +4200,62 @@ Create a new witness configuration Nimble / Alletra 6K
 Create a new witness configuration Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_create_witness_input import NimbleCreateWitnessInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-nimble_create_witness_input = greenlake-data-services.NimbleCreateWitnessInput() # NimbleCreateWitnessInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create a new witness configuration Nimble / Alletra 6K
-    api_response = api_instance.device_type2_create_witness(system_id, nimble_create_witness_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_create_witness: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    nimble_create_witness_input = NimbleCreateWitnessInput(
+        host="witness-host9801.sjcvlab.com",
+        password="password_25-24",
+        port=5395,
+        username="witness9801",
+    ) # NimbleCreateWitnessInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create a new witness configuration Nimble / Alletra 6K
+        api_response = api_instance.device_type2_create_witness(system_id, nimble_create_witness_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_create_witness: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **nimble_create_witness_input** | [**NimbleCreateWitnessInput**](NimbleCreateWitnessInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **nimble_create_witness_input** | [**NimbleCreateWitnessInput**](NimbleCreateWitnessInput.md)|  |
 
 ### Return type
 
@@ -2473,6 +4269,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2484,37 +4294,60 @@ Edit Nimble Mail Settings of Nimble / Alletra 6K
 Edit Nimble Mail Settings of Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
+from greenlake_data_services.model.nimble_mail_setting_input import NimbleMailSettingInput
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-nimble_mail_setting_input = greenlake-data-services.NimbleMailSettingInput() # NimbleMailSettingInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit Nimble Mail Settings of Nimble / Alletra 6K
-    api_response = api_instance.device_type2_edit_mail_settings(system_id, nimble_mail_setting_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_edit_mail_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    nimble_mail_setting_input = NimbleMailSettingInput(
+        smtp_port=25,
+        smtp_server="example-1.com",
+    ) # NimbleMailSettingInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit Nimble Mail Settings of Nimble / Alletra 6K
+        api_response = api_instance.device_type2_edit_mail_settings(system_id, nimble_mail_setting_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_edit_mail_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **nimble_mail_setting_input** | [**NimbleMailSettingInput**](NimbleMailSettingInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **nimble_mail_setting_input** | [**NimbleMailSettingInput**](NimbleMailSettingInput.md)|  |
 
 ### Return type
 
@@ -2528,6 +4361,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2539,39 +4386,103 @@ Edit Nimble / Alletra 6K network setting identified by {networkSettingId}
 Edit Nimble / Alletra 6K network setting identified by {networkSettingId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_edit_network_settings import NimbleEditNetworkSettings
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-network_setting_id = 'network_setting_id_example' # str | Identifier of network setting. A 42 digit hexadecimal number.
-nimble_edit_network_settings = greenlake-data-services.NimbleEditNetworkSettings() # NimbleEditNetworkSettings | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit Nimble / Alletra 6K network setting identified by {networkSettingId}
-    api_response = api_instance.device_type2_edit_network_setting_by_id(system_id, network_setting_id, nimble_edit_network_settings)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_edit_network_setting_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    network_setting_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of network setting. A 42 digit hexadecimal number.
+    nimble_edit_network_settings = NimbleEditNetworkSettings(
+        array_list=[
+            NimbleEditArrayNet(
+                ctrlr_a_support_ip="127.0.0.102",
+                ctrlr_b_support_ip="127.0.0.103",
+                name="g1a16",
+                nic_list=[
+                    NimbleNIC(
+                        data_ip="127.0.0.102",
+                        name="eth1",
+                        subnet_label="subnet1",
+                        tagged=True,
+                    ),
+                ],
+            ),
+        ],
+        iscsi_automatic_connection_method=True,
+        iscsi_connection_rebalancing=True,
+        mgmt_ip="128.0.0.1",
+        name="draft",
+        route_list=[
+            NimbleRoute(
+                gateway="127.0.0.2",
+                tgt_netmask="255.255.255.0",
+                tgt_network="127.0.2.0",
+            ),
+        ],
+        secondary_mgmt_ip="128.0.0.1",
+        subnet_list=[
+            NimbleSubnet(
+                allow_group=True,
+                allow_iscsi=True,
+                discovery_ip="127.0.0.102",
+                failover=True,
+                failover_enable_time=1591599192000,
+                label="subnet1",
+                mtu=1500,
+                netmask="255.0.0.0",
+                network="127.0.0.108",
+                netzone_type="single",
+                type="mgmt",
+                vlan_id=0,
+            ),
+        ],
+    ) # NimbleEditNetworkSettings | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit Nimble / Alletra 6K network setting identified by {networkSettingId}
+        api_response = api_instance.device_type2_edit_network_setting_by_id(system_id, network_setting_id, nimble_edit_network_settings)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_edit_network_setting_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **network_setting_id** | **str**| Identifier of network setting. A 42 digit hexadecimal number. | 
- **nimble_edit_network_settings** | [**NimbleEditNetworkSettings**](NimbleEditNetworkSettings.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **network_setting_id** | **str**| Identifier of network setting. A 42 digit hexadecimal number. |
+ **nimble_edit_network_settings** | [**NimbleEditNetworkSettings**](NimbleEditNetworkSettings.md)|  |
 
 ### Return type
 
@@ -2585,6 +4496,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2596,39 +4521,94 @@ Edit a replication partner for Nimble / Alletra 6K given by replicationpartnerId
 Edit a replication partner for Nimble / Alletra 6K given by replicationpartnerId
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_edit_replication_partner_input import NimbleEditReplicationPartnerInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-replicationpartner_id = 'replicationpartner_id_example' # str | Identifier of replicationpartner. A 42 digit hexadecimal number.
-nimble_edit_replication_partner_input = greenlake-data-services.NimbleEditReplicationPartnerInput() # NimbleEditReplicationPartnerInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit a replication partner for Nimble / Alletra 6K given by replicationpartnerId
-    api_response = api_instance.device_type2_edit_replication_partners_by_id(system_id, replicationpartner_id, nimble_edit_replication_partner_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_edit_replication_partners_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    replicationpartner_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of replicationpartner. A 42 digit hexadecimal number.
+    nimble_edit_replication_partner_input = NimbleEditReplicationPartnerInput(
+        replication_partners=[
+            EditReplicationPartner(
+                control_port=1024,
+                data_port=1024,
+                description="99.9999% availability",
+                remote_partner_id="005319ed73385876a4000000000000000000000006",
+                repl_hostname="15.213.204.121",
+                source=EditSourcePartner(
+                    hostname="15.213.204.163",
+                    name="replicationPartner1",
+                    subnet_label="myobject-5",
+                    subnet_type="mgmt",
+                ),
+                subnet_label="myobject-5",
+                subnet_type="mgmt",
+                target=EditTargetPartner(
+                    hostname="15.213.204.164",
+                    name="replicationPartner2",
+                    subnet_label="myobject-5",
+                    subnet_type="mgmt",
+                ),
+                target_system_id="005319ed73385876a4000000000000000000000001",
+                throttles=[
+                    ReplicationThrottle(
+                        days="example day",
+                        description="Throttle one",
+                        name="Throttle1",
+                        thr_at_time=10800,
+                        thr_bandwidth=14,
+                        thr_until_time=14400,
+                    ),
+                ],
+            ),
+        ],
+    ) # NimbleEditReplicationPartnerInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit a replication partner for Nimble / Alletra 6K given by replicationpartnerId
+        api_response = api_instance.device_type2_edit_replication_partners_by_id(system_id, replicationpartner_id, nimble_edit_replication_partner_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_edit_replication_partners_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **replicationpartner_id** | **str**| Identifier of replicationpartner. A 42 digit hexadecimal number. | 
- **nimble_edit_replication_partner_input** | [**NimbleEditReplicationPartnerInput**](NimbleEditReplicationPartnerInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **replicationpartner_id** | **str**| Identifier of replicationpartner. A 42 digit hexadecimal number. |
+ **nimble_edit_replication_partner_input** | [**NimbleEditReplicationPartnerInput**](NimbleEditReplicationPartnerInput.md)|  |
 
 ### Return type
 
@@ -2642,6 +4622,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2653,37 +4647,140 @@ Edit system settings of Nimble / Alletra 6K
 Edit system settings of Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.nimble_edit_system_settings import NimbleEditSystemSettings
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-nimble_edit_system_settings = greenlake-data-services.NimbleEditSystemSettings() # NimbleEditSystemSettings | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit system settings of Nimble / Alletra 6K
-    api_response = api_instance.device_type2_edit_system_settings(system_id, nimble_edit_system_settings)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_edit_system_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    nimble_edit_system_settings = NimbleEditSystemSettings(
+        alert_settings=EditAlertSettings(
+            alert_from_email_addr="bob@wikipedia.com",
+            alert_min_level="warning",
+            alert_to_email_addrs="bob@wikipedia.com,jason@wiki.com",
+            send_alert_to_support=True,
+        ),
+        date_timezone_settings=EditDateTimezoneSettings(
+            date=1598267193,
+            ntp_server="0.abc.pool.ntp.org",
+            timezone="America/Los_Angeles",
+        ),
+        dns_settings=EditDnsSettings(
+            dns_servers=[
+                IPAddressObject(
+                    ip_addr="10.0.0.11",
+                ),
+            ],
+            domain_name="example-1.com",
+        ),
+        isns_settings=EditIsnsSettings(
+            isns_enabled=True,
+            isns_port=1080,
+            isns_server="isns-server.com",
+        ),
+        name="NimbleGroup55",
+        proxy_settings=EditProxySettings(
+            proxy_port=1234,
+            proxy_server="example-1.com",
+            proxy_username="usr1",
+        ),
+        security_settings=EditSecuritySettings(
+            user_inactivity_timeout=1800,
+        ),
+        smtp_settings=EditSmtpMailSettings(
+            smtp_port=25,
+            smtp_server="example-1.com",
+        ),
+        snmp_settings=EditSnmpSettings(
+            snmp_community="private",
+            snmp_get_enabled=True,
+            snmp_get_port=1080,
+            snmp_sys_contact="System contact",
+            snmp_sys_location="Location",
+            snmp_trap_enabled=True,
+            snmp_trap_host="snmphost-1.com",
+            snmp_trap_port=1080,
+        ),
+        support_settings=EditSupportSettings(
+            allow_analytics_gui=False,
+            allow_support_tunnel=False,
+            autosupport_enabled=True,
+        ),
+        syslogd_settings=EditSyslogdSettings(
+            syslogd_enabled=True,
+            syslogd_port=1080,
+            syslogd_server="sysloghost-1.com",
+            syslogd_servers=[
+                NimbleSyslogdServerInfo(
+                    syslog_port=1080,
+                    syslog_server="sysloghost-1.com",
+                ),
+            ],
+        ),
+        system_parameters=EditSystemParameters(
+            alarms_enabled=True,
+            default_volume_limit=10,
+            fc_enabled=True,
+            group_target_enabled=True,
+            iscsi_enabled=True,
+            repl_throttle_list=[
+                EditThrottle(
+                    days="monday,tuesday",
+                    description="Throttle one",
+                    thr_at_time=10800,
+                    thr_bandwidth=14,
+                    thr_bandwidth_kbps=1400,
+                    thr_bandwidth_limit_kbps=1400,
+                    thr_until_time=14400,
+                ),
+            ],
+            vss_validation_timeout=60,
+        ),
+    ) # NimbleEditSystemSettings | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit system settings of Nimble / Alletra 6K
+        api_response = api_instance.device_type2_edit_system_settings(system_id, nimble_edit_system_settings)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_edit_system_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **nimble_edit_system_settings** | [**NimbleEditSystemSettings**](NimbleEditSystemSettings.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **nimble_edit_system_settings** | [**NimbleEditSystemSettings**](NimbleEditSystemSettings.md)|  |
 
 ### Return type
 
@@ -2698,55 +4795,97 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_all_application_servers**
-> ApplicationServersList device_type2_get_all_application_servers(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+> ApplicationServersList device_type2_get_all_application_servers(system_id)
 
 Get all application servers details by Nimble / Alletra 6K
 
 Get all application servers details by Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.application_servers_list import ApplicationServersList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter application servers by Key. (optional)
-sort = 'sort_example' # str | oData query to sort application servers by Key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get all application servers details by Nimble / Alletra 6K
-    api_response = api_instance.device_type2_get_all_application_servers(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_all_application_servers: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "id eq 2a0df0fe6f7dc7bb16000000000000000000004817" # str | Lucene query to filter application servers by Key. (optional)
+    sort = "name desc" # str | oData query to sort application servers by Key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get all application servers details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_all_application_servers(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_all_application_servers: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get all application servers details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_all_application_servers(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_all_application_servers: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter application servers by Key. | [optional] 
- **sort** | **str**| oData query to sort application servers by Key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter application servers by Key. | [optional]
+ **sort** | **str**| oData query to sort application servers by Key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2761,55 +4900,96 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_all_network_settings**
-> NimbleNetworkSettingsList device_type2_get_all_network_settings(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+> NimbleNetworkSettingsList device_type2_get_all_network_settings(system_id)
 
 Get all network settings details by Nimble / Alletra 6K
 
 Get all network settings details by Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.nimble_network_settings_list import NimbleNetworkSettingsList
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter network settings by Key. (optional)
-sort = 'sort_example' # str | oData query to sort network settings resource by Key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get all network settings details by Nimble / Alletra 6K
-    api_response = api_instance.device_type2_get_all_network_settings(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_all_network_settings: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "id eq 2a0df0fe6f7dc7bb16000000000000000000004817" # str | Lucene query to filter network settings by Key. (optional)
+    sort = "name desc" # str | oData query to sort network settings resource by Key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get all network settings details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_all_network_settings(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_all_network_settings: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get all network settings details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_all_network_settings(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_all_network_settings: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter network settings by Key. | [optional] 
- **sort** | **str**| oData query to sort network settings resource by Key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter network settings by Key. | [optional]
+ **sort** | **str**| oData query to sort network settings resource by Key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2824,49 +5004,91 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage group object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_application_server_by_id**
-> ApplicationServerDetails device_type2_get_application_server_by_id(system_id, application_server_id, select=select)
+> ApplicationServerDetails device_type2_get_application_server_by_id(system_id, application_server_id)
 
 Get details of Nimble / Alletra 6K application server identified by {applicationServerId}
 
 Get details of Nimble / Alletra 6K application server identified by {applicationServerId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.application_server_details import ApplicationServerDetails
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-application_server_id = 'application_server_id_example' # str | Identifier of application server. A 42 digit hexadecimal number.
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of Nimble / Alletra 6K application server identified by {applicationServerId}
-    api_response = api_instance.device_type2_get_application_server_by_id(system_id, application_server_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_application_server_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    application_server_id = "2a0df0fe6f7dc7bb16000000000000000000000007" # str | Identifier of application server. A 42 digit hexadecimal number.
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of Nimble / Alletra 6K application server identified by {applicationServerId}
+        api_response = api_instance.device_type2_get_application_server_by_id(system_id, application_server_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_application_server_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of Nimble / Alletra 6K application server identified by {applicationServerId}
+        api_response = api_instance.device_type2_get_application_server_by_id(system_id, application_server_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_application_server_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2881,49 +5103,90 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_network_setting_by_id**
-> NimbleNetworkSettingsDetailsWithRequestUri device_type2_get_network_setting_by_id(system_id, network_setting_id, select=select)
+> NimbleNetworkSettingsDetailsWithRequestUri device_type2_get_network_setting_by_id(system_id, network_setting_id)
 
 Get details of Nimble / Alletra 6K network setting identified by {networkSettingId}
 
 Get details of Nimble / Alletra 6K network setting identified by {networkSettingId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_network_settings_details_with_request_uri import NimbleNetworkSettingsDetailsWithRequestUri
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-network_setting_id = 'network_setting_id_example' # str | Identifier of network setting. A 42 digit hexadecimal number.
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of Nimble / Alletra 6K network setting identified by {networkSettingId}
-    api_response = api_instance.device_type2_get_network_setting_by_id(system_id, network_setting_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_network_setting_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    network_setting_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of network setting. A 42 digit hexadecimal number.
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of Nimble / Alletra 6K network setting identified by {networkSettingId}
+        api_response = api_instance.device_type2_get_network_setting_by_id(system_id, network_setting_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_network_setting_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of Nimble / Alletra 6K network setting identified by {networkSettingId}
+        api_response = api_instance.device_type2_get_network_setting_by_id(system_id, network_setting_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_network_setting_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **network_setting_id** | **str**| Identifier of network setting. A 42 digit hexadecimal number. | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **network_setting_id** | **str**| Identifier of network setting. A 42 digit hexadecimal number. |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -2938,57 +5201,99 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | network settings object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_replication_partners**
-> NimbleReplicationPartnersList device_type2_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
+> NimbleReplicationPartnersList device_type2_get_replication_partners(system_id)
 
 Get all replication-partners details for Nimble / Alletra 6K
 
 Get all replication-partners details for Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_replication_partners_list import NimbleReplicationPartnersList
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter replication partners by Key. (optional)
-sort = 'sort_example' # str | oData query to sort replication partner resource by Key. (optional)
-include_indirect_partners = True # bool | Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get all replication-partners details for Nimble / Alletra 6K
-    api_response = api_instance.device_type2_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "id eq 2a0df0fe6f7dc7bb16000000000000000000004817" # str | Lucene query to filter replication partners by Key. (optional)
+    sort = "name desc" # str | oData query to sort replication partner resource by Key. (optional)
+    include_indirect_partners = True # bool | Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get all replication-partners details for Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_replication_partners(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get all replication-partners details for Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_replication_partners(system_id, limit=limit, offset=offset, filter=filter, sort=sort, include_indirect_partners=include_indirect_partners, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter replication partners by Key. | [optional] 
- **sort** | **str**| oData query to sort replication partner resource by Key. | [optional] 
- **include_indirect_partners** | **bool**| Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter replication partners by Key. | [optional]
+ **sort** | **str**| oData query to sort replication partner resource by Key. | [optional]
+ **include_indirect_partners** | **bool**| Include indirect partners. Indirect partners are excluded by default. This parameter cannot be used with other query parameters. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -3003,49 +5308,91 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_replication_partners_by_id**
-> NimbleReplicationPartnerDetails device_type2_get_replication_partners_by_id(system_id, replicationpartner_id, select=select)
+> NimbleReplicationPartnerDetails device_type2_get_replication_partners_by_id(system_id, replicationpartner_id)
 
 Get details of Nimble / Alletra 6K replication-partner identified by {replicationpartnerId}
 
 Get details of Nimble / Alletra 6K replication-partner identified by {replicationpartnerId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_replication_partner_details import NimbleReplicationPartnerDetails
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-replicationpartner_id = 'replicationpartner_id_example' # str | Identifier of replicationpartner. A 42 digit hexadecimal number.
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of Nimble / Alletra 6K replication-partner identified by {replicationpartnerId}
-    api_response = api_instance.device_type2_get_replication_partners_by_id(system_id, replicationpartner_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    replicationpartner_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of replicationpartner. A 42 digit hexadecimal number.
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of Nimble / Alletra 6K replication-partner identified by {replicationpartnerId}
+        api_response = api_instance.device_type2_get_replication_partners_by_id(system_id, replicationpartner_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of Nimble / Alletra 6K replication-partner identified by {replicationpartnerId}
+        api_response = api_instance.device_type2_get_replication_partners_by_id(system_id, replicationpartner_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_replication_partners_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **replicationpartner_id** | **str**| Identifier of replicationpartner. A 42 digit hexadecimal number. | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **replicationpartner_id** | **str**| Identifier of replicationpartner. A 42 digit hexadecimal number. |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -3060,55 +5407,97 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_witnesses**
-> NimbleWitnessesList device_type2_get_witnesses(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+> NimbleWitnessesList device_type2_get_witnesses(system_id)
 
 Get all witness configuration details by Nimble / Alletra 6K
 
 Get all witness configuration details by Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.nimble_witnesses_list import NimbleWitnessesList
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-limit = 56 # int | Number of items to return at a time (optional)
-offset = 56 # int | The offset of the first item in the collection to return (optional)
-filter = 'filter_example' # str | Lucene query to filter witnesses by Key. (optional)
-sort = 'sort_example' # str | oData query to sort witnesses resource by Key. (optional)
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get all witness configuration details by Nimble / Alletra 6K
-    api_response = api_instance.device_type2_get_witnesses(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_witnesses: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    limit = 10 # int | Number of items to return at a time (optional)
+    offset = 5 # int | The offset of the first item in the collection to return (optional)
+    filter = "id eq 2a0df0fe6f7dc7bb16000000000000000000004007" # str | Lucene query to filter witnesses by Key. (optional)
+    sort = "name desc" # str | oData query to sort witnesses resource by Key. (optional)
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get all witness configuration details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_witnesses(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_witnesses: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get all witness configuration details by Nimble / Alletra 6K
+        api_response = api_instance.device_type2_get_witnesses(system_id, limit=limit, offset=offset, filter=filter, sort=sort, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_witnesses: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **limit** | **int**| Number of items to return at a time | [optional] 
- **offset** | **int**| The offset of the first item in the collection to return | [optional] 
- **filter** | **str**| Lucene query to filter witnesses by Key. | [optional] 
- **sort** | **str**| oData query to sort witnesses resource by Key. | [optional] 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **limit** | **int**| Number of items to return at a time | [optional]
+ **offset** | **int**| The offset of the first item in the collection to return | [optional]
+ **filter** | **str**| Lucene query to filter witnesses by Key. | [optional]
+ **sort** | **str**| oData query to sort witnesses resource by Key. | [optional]
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -3123,49 +5512,91 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_get_witnesses_by_id**
-> NimbleWitnessDetails device_type2_get_witnesses_by_id(system_id, witness_id, select=select)
+> NimbleWitnessDetails device_type2_get_witnesses_by_id(system_id, witness_id)
 
 Get details of Nimble / Alletra 6K witness configuration identified by {witnessId}
 
 Get details of Nimble / Alletra 6K witness configuration identified by {witnessId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.nimble_witness_details import NimbleWitnessDetails
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-witness_id = 'witness_id_example' # str | Identifier of witness. A 42 digit hexadecimal number.
-select = 'select_example' # str | Query to select only the required parameters, separated by . if nested (optional)
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Get details of Nimble / Alletra 6K witness configuration identified by {witnessId}
-    api_response = api_instance.device_type2_get_witnesses_by_id(system_id, witness_id, select=select)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_get_witnesses_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    witness_id = "2a0df0fe6f7dc7bb16000000000000000000004007" # str | Identifier of witness. A 42 digit hexadecimal number.
+    select = "id" # str | Query to select only the required parameters, separated by . if nested (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Get details of Nimble / Alletra 6K witness configuration identified by {witnessId}
+        api_response = api_instance.device_type2_get_witnesses_by_id(system_id, witness_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_witnesses_by_id: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # Get details of Nimble / Alletra 6K witness configuration identified by {witnessId}
+        api_response = api_instance.device_type2_get_witnesses_by_id(system_id, witness_id, select=select)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_get_witnesses_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. | 
- **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional] 
+ **system_id** | **str**| ID of the storage system |
+ **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. |
+ **select** | **str**| Query to select only the required parameters, separated by . if nested | [optional]
 
 ### Return type
 
@@ -3180,6 +5611,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_pause_replication_partner**
@@ -3190,37 +5635,65 @@ Pause the replication pair of Nimble / Alletra 6K
 Pause the replication pair of Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.pause_resume_nimble_replication_partner_pair_input import PauseResumeNimbleReplicationPartnerPairInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-pause_resume_nimble_replication_partner_pair_input = greenlake-data-services.PauseResumeNimbleReplicationPartnerPairInput() # PauseResumeNimbleReplicationPartnerPairInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Pause the replication pair of Nimble / Alletra 6K
-    api_response = api_instance.device_type2_pause_replication_partner(system_id, pause_resume_nimble_replication_partner_pair_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_pause_replication_partner: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    pause_resume_nimble_replication_partner_pair_input = PauseResumeNimbleReplicationPartnerPairInput(
+        replication_partners=[
+            ReplicationPartnerPairAction(
+                replication_partner_system_id="7a0ef0fe6f7dc7bb16000000000000000000001257",
+                src_replication_id="3a0df0fe6f7dc7bb16000000000000000000003467",
+                target_replication_id="1a0hf0fe6f7dc7bb16000000000000000000007835",
+            ),
+        ],
+    ) # PauseResumeNimbleReplicationPartnerPairInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Pause the replication pair of Nimble / Alletra 6K
+        api_response = api_instance.device_type2_pause_replication_partner(system_id, pause_resume_nimble_replication_partner_pair_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_pause_replication_partner: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  |
 
 ### Return type
 
@@ -3234,6 +5707,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3245,37 +5732,56 @@ Remove application server identified by {applicationServerId} from Nimble / Alle
 Remove application server identified by {applicationServerId} from Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-application_server_id = 'application_server_id_example' # str | Identifier of application server. A 42 digit hexadecimal number.
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Remove application server identified by {applicationServerId} from Nimble / Alletra 6K
-    api_response = api_instance.device_type2_remove_application_server_by_id(system_id, application_server_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_remove_application_server_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    application_server_id = "2a0df0fe6f7dc7bb16000000000000000000000007" # str | Identifier of application server. A 42 digit hexadecimal number.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Remove application server identified by {applicationServerId} from Nimble / Alletra 6K
+        api_response = api_instance.device_type2_remove_application_server_by_id(system_id, application_server_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_remove_application_server_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. | 
+ **system_id** | **str**| ID of the storage system |
+ **application_server_id** | **str**| Identifier of application server. A 42 digit hexadecimal number. |
 
 ### Return type
 
@@ -3289,6 +5795,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3300,37 +5819,65 @@ Remove list of replication partner for Nimble / Alletra 6K
 Remove list of replication partner for Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.remove_replication_partners import RemoveReplicationPartners
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-remove_replication_partners = greenlake-data-services.RemoveReplicationPartners() # RemoveReplicationPartners | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Remove list of replication partner for Nimble / Alletra 6K
-    api_response = api_instance.device_type2_remove_replication_partner(system_id, remove_replication_partners)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_remove_replication_partner: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    remove_replication_partners = RemoveReplicationPartners(
+        replication_partners=[
+            ReplicationPartnerPairAction(
+                replication_partner_system_id="7a0ef0fe6f7dc7bb16000000000000000000001257",
+                src_replication_id="3a0df0fe6f7dc7bb16000000000000000000003467",
+                target_replication_id="1a0hf0fe6f7dc7bb16000000000000000000007835",
+            ),
+        ],
+    ) # RemoveReplicationPartners | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Remove list of replication partner for Nimble / Alletra 6K
+        api_response = api_instance.device_type2_remove_replication_partner(system_id, remove_replication_partners)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_remove_replication_partner: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **remove_replication_partners** | [**RemoveReplicationPartners**](RemoveReplicationPartners.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **remove_replication_partners** | [**RemoveReplicationPartners**](RemoveReplicationPartners.md)|  |
 
 ### Return type
 
@@ -3344,6 +5891,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3355,37 +5916,56 @@ Remove witness identified by {witnessId} from Nimble / Alletra 6K
 Remove witness identified by {witnessId} from Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-witness_id = 'witness_id_example' # str | Identifier of witness. A 42 digit hexadecimal number.
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Remove witness identified by {witnessId} from Nimble / Alletra 6K
-    api_response = api_instance.device_type2_remove_witnesses_by_id(system_id, witness_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_remove_witnesses_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    witness_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of witness. A 42 digit hexadecimal number.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Remove witness identified by {witnessId} from Nimble / Alletra 6K
+        api_response = api_instance.device_type2_remove_witnesses_by_id(system_id, witness_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_remove_witnesses_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. | 
+ **system_id** | **str**| ID of the storage system |
+ **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. |
 
 ### Return type
 
@@ -3400,6 +5980,19 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_resume_replication_partner**
@@ -3410,37 +6003,65 @@ Resume the replication pair of Nimble / Alletra 6K
 Resume the replication pair of Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.pause_resume_nimble_replication_partner_pair_input import PauseResumeNimbleReplicationPartnerPairInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-pause_resume_nimble_replication_partner_pair_input = greenlake-data-services.PauseResumeNimbleReplicationPartnerPairInput() # PauseResumeNimbleReplicationPartnerPairInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Resume the replication pair of Nimble / Alletra 6K
-    api_response = api_instance.device_type2_resume_replication_partner(system_id, pause_resume_nimble_replication_partner_pair_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_resume_replication_partner: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    pause_resume_nimble_replication_partner_pair_input = PauseResumeNimbleReplicationPartnerPairInput(
+        replication_partners=[
+            ReplicationPartnerPairAction(
+                replication_partner_system_id="7a0ef0fe6f7dc7bb16000000000000000000001257",
+                src_replication_id="3a0df0fe6f7dc7bb16000000000000000000003467",
+                target_replication_id="1a0hf0fe6f7dc7bb16000000000000000000007835",
+            ),
+        ],
+    ) # PauseResumeNimbleReplicationPartnerPairInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Resume the replication pair of Nimble / Alletra 6K
+        api_response = api_instance.device_type2_resume_replication_partner(system_id, pause_resume_nimble_replication_partner_pair_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_resume_replication_partner: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  |
 
 ### Return type
 
@@ -3455,6 +6076,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_send_auto_support**
@@ -3465,35 +6100,54 @@ Send auto support information of Nimble / Alletra 6K identified by {systemId}
 Send auto support information of Nimble / Alletra 6K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Send auto support information of Nimble / Alletra 6K identified by {systemId}
-    api_response = api_instance.device_type2_send_auto_support(system_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_send_auto_support: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Send auto support information of Nimble / Alletra 6K identified by {systemId}
+        api_response = api_instance.device_type2_send_auto_support(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_send_auto_support: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
+ **system_id** | **str**| ID of the storage system |
 
 ### Return type
 
@@ -3508,6 +6162,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_test_replication_configuration**
@@ -3518,37 +6186,65 @@ Test the replication partner pair of Nimble / Alletra 6K
 Test the replication partner pair of Nimble / Alletra 6K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.task_response_replication import TaskResponseReplication
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.pause_resume_nimble_replication_partner_pair_input import PauseResumeNimbleReplicationPartnerPairInput
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-pause_resume_nimble_replication_partner_pair_input = greenlake-data-services.PauseResumeNimbleReplicationPartnerPairInput() # PauseResumeNimbleReplicationPartnerPairInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Test the replication partner pair of Nimble / Alletra 6K
-    api_response = api_instance.device_type2_test_replication_configuration(system_id, pause_resume_nimble_replication_partner_pair_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_test_replication_configuration: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    pause_resume_nimble_replication_partner_pair_input = PauseResumeNimbleReplicationPartnerPairInput(
+        replication_partners=[
+            ReplicationPartnerPairAction(
+                replication_partner_system_id="7a0ef0fe6f7dc7bb16000000000000000000001257",
+                src_replication_id="3a0df0fe6f7dc7bb16000000000000000000003467",
+                target_replication_id="1a0hf0fe6f7dc7bb16000000000000000000007835",
+            ),
+        ],
+    ) # PauseResumeNimbleReplicationPartnerPairInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Test the replication partner pair of Nimble / Alletra 6K
+        api_response = api_instance.device_type2_test_replication_configuration(system_id, pause_resume_nimble_replication_partner_pair_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_test_replication_configuration: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  | 
+ **system_id** | **str**| ID of the storage system |
+ **pause_resume_nimble_replication_partner_pair_input** | [**PauseResumeNimbleReplicationPartnerPairInput**](PauseResumeNimbleReplicationPartnerPairInput.md)|  |
 
 ### Return type
 
@@ -3563,6 +6259,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Success |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **device_type2_test_witnesses_by_id**
@@ -3573,37 +6283,56 @@ Test and validate the witness configuration between the host identified by {witn
 Test and validate the witness configuration between the host identified by {witnessId} from Nimble / Alletra 6K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nimble_test_witness_response import NimbleTestWitnessResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | ID of the storage system
-witness_id = 'witness_id_example' # str | Identifier of witness. A 42 digit hexadecimal number.
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Test and validate the witness configuration between the host identified by {witnessId} from Nimble / Alletra 6K identified by {systemId}
-    api_response = api_instance.device_type2_test_witnesses_by_id(system_id, witness_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->device_type2_test_witnesses_by_id: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | ID of the storage system
+    witness_id = "2a0df0fe6f7dc7bb16000000000000000000004817" # str | Identifier of witness. A 42 digit hexadecimal number.
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Test and validate the witness configuration between the host identified by {witnessId} from Nimble / Alletra 6K identified by {systemId}
+        api_response = api_instance.device_type2_test_witnesses_by_id(system_id, witness_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->device_type2_test_witnesses_by_id: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| ID of the storage system | 
- **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. | 
+ **system_id** | **str**| ID of the storage system |
+ **witness_id** | **str**| Identifier of witness. A 42 digit hexadecimal number. |
 
 ### Return type
 
@@ -3618,6 +6347,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **mail_settings_associate**
@@ -3628,37 +6371,62 @@ Add SMTP/Mail server settigs
 Add SMTP/Mail server settigs
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.mailsettings_input import MailsettingsInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-mailsettings_input = greenlake-data-services.MailsettingsInput() # MailsettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add SMTP/Mail server settigs
-    api_response = api_instance.mail_settings_associate(system_id, mailsettings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->mail_settings_associate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    mailsettings_input = MailsettingsInput(
+        mail_host_domain="hpe.com",
+        mail_host_server="smtp1.hpe.com",
+        port=25,
+        sender_email_id="sender_email_id_example",
+    ) # MailsettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add SMTP/Mail server settigs
+        api_response = api_instance.mail_settings_associate(system_id, mailsettings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->mail_settings_associate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **mailsettings_input** | [**MailsettingsInput**](MailsettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **mailsettings_input** | [**MailsettingsInput**](MailsettingsInput.md)|  |
 
 ### Return type
 
@@ -3672,6 +6440,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** | Created |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3683,35 +6465,54 @@ Delete SMTP/mail server settings
 Delete SMTP/mail server settings
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete SMTP/mail server settings
-    api_response = api_instance.mail_settings_delete(system_id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->mail_settings_delete: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete SMTP/mail server settings
+        api_response = api_instance.mail_settings_delete(system_id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->mail_settings_delete: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
 
 ### Return type
 
@@ -3725,6 +6526,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3736,37 +6551,62 @@ Edit SMTP/Mail server settigs
 Edit SMTP/Mail server settigs
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.mailsettings_input import MailsettingsInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-mailsettings_input = greenlake-data-services.MailsettingsInput() # MailsettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit SMTP/Mail server settigs
-    api_response = api_instance.mail_settings_update(system_id, mailsettings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->mail_settings_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    mailsettings_input = MailsettingsInput(
+        mail_host_domain="hpe.com",
+        mail_host_server="smtp1.hpe.com",
+        port=25,
+        sender_email_id="sender_email_id_example",
+    ) # MailsettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit SMTP/Mail server settigs
+        api_response = api_instance.mail_settings_update(system_id, mailsettings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->mail_settings_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **mailsettings_input** | [**MailsettingsInput**](MailsettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **mailsettings_input** | [**MailsettingsInput**](MailsettingsInput.md)|  |
 
 ### Return type
 
@@ -3780,6 +6620,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3791,37 +6645,59 @@ Edit CIM network service configuration
 Edit CIM network service configuration
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.nw_cim_edit import NwCimEdit
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-nw_cim_edit = greenlake-data-services.NwCimEdit() # NwCimEdit | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit CIM network service configuration
-    api_response = api_instance.network_service_cim_update(system_id, nw_cim_edit)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->network_service_cim_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    nw_cim_edit = NwCimEdit(
+        cim=NwCimEditCim(None),
+    ) # NwCimEdit | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit CIM network service configuration
+        api_response = api_instance.network_service_cim_update(system_id, nw_cim_edit)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->network_service_cim_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **nw_cim_edit** | [**NwCimEdit**](NwCimEdit.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **nw_cim_edit** | [**NwCimEdit**](NwCimEdit.md)|  |
 
 ### Return type
 
@@ -3835,6 +6711,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3846,37 +6736,69 @@ Add SNMP Manager settings
 Add SNMP Manager settings
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.nw_add_snmp_mgr import NwAddSnmpMgr
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-nw_add_snmp_mgr = greenlake-data-services.NwAddSnmpMgr() # NwAddSnmpMgr | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add SNMP Manager settings
-    api_response = api_instance.network_service_snmp_mgr_create(system_id, nw_add_snmp_mgr)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_create: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    nw_add_snmp_mgr = NwAddSnmpMgr(
+        snmp_config=[
+            SnmpConfigParams(
+                manager_ip="15.218.169.163",
+                notify="STANDARD",
+                port=162,
+                retry=2,
+                timeout_secs=162,
+                user="user1",
+                version=2,
+            ),
+        ],
+    ) # NwAddSnmpMgr | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add SNMP Manager settings
+        api_response = api_instance.network_service_snmp_mgr_create(system_id, nw_add_snmp_mgr)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_create: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **nw_add_snmp_mgr** | [**NwAddSnmpMgr**](NwAddSnmpMgr.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **nw_add_snmp_mgr** | [**NwAddSnmpMgr**](NwAddSnmpMgr.md)|  |
 
 ### Return type
 
@@ -3891,6 +6813,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **network_service_snmp_mgr_delete**
@@ -3901,37 +6837,56 @@ Delete SNMP manager settings identified by {id}
 Delete SNMP manager settings identified by {id}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the SNMP manager
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete SNMP manager settings identified by {id}
-    api_response = api_instance.network_service_snmp_mgr_delete(system_id, id)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_delete: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "e9d353bf98fc1a6bdb90b824e3ca14b5" # str | ID of the SNMP manager
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete SNMP manager settings identified by {id}
+        api_response = api_instance.network_service_snmp_mgr_delete(system_id, id)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_delete: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the SNMP manager | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the SNMP manager |
 
 ### Return type
 
@@ -3946,6 +6901,20 @@ Name | Type | Description  | Notes
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
+
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **network_service_snmp_mgr_update**
@@ -3956,39 +6925,67 @@ Edit SNMP Manager settings for the specified Id
 Edit SNMP Manager settings for the specified Id
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.nw_snmp_mgr_edit import NwSnmpMgrEdit
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the SNMP manager
-nw_snmp_mgr_edit = greenlake-data-services.NwSnmpMgrEdit() # NwSnmpMgrEdit | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit SNMP Manager settings for the specified Id
-    api_response = api_instance.network_service_snmp_mgr_update(system_id, id, nw_snmp_mgr_edit)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "e9d353bf98fc1a6bdb90b824e3ca14b5" # str | ID of the SNMP manager
+    nw_snmp_mgr_edit = NwSnmpMgrEdit(
+        manager_ip="15.218.169.163",
+        notify="STANDARD",
+        port=162,
+        retry=2,
+        timeout_secs=162,
+        user="user1",
+        version=2,
+    ) # NwSnmpMgrEdit | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit SNMP Manager settings for the specified Id
+        api_response = api_instance.network_service_snmp_mgr_update(system_id, id, nw_snmp_mgr_edit)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->network_service_snmp_mgr_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the SNMP manager | 
- **nw_snmp_mgr_edit** | [**NwSnmpMgrEdit**](NwSnmpMgrEdit.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the SNMP manager |
+ **nw_snmp_mgr_edit** | [**NwSnmpMgrEdit**](NwSnmpMgrEdit.md)|  |
 
 ### Return type
 
@@ -4002,6 +6999,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4013,37 +7024,75 @@ Post Network-Settings details for a storage system Primera / Alletra 9K
 Post Network-Settings details for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
+from greenlake_data_services.model.edit_network_settings_input import EditNetworkSettingsInput
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-edit_network_settings_input = greenlake-data-services.EditNetworkSettingsInput() # EditNetworkSettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Post Network-Settings details for a storage system Primera / Alletra 9K
-    api_response = api_instance.network_settings_associate(system_id, edit_network_settings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->network_settings_associate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    edit_network_settings_input = EditNetworkSettingsInput(
+        dns_addresses=[
+            "dns_addresses_example",
+        ],
+        ipv4_address="ipv4_address_example",
+        ipv4_gateway="ipv4_gateway_example",
+        ipv4_subnet_mask="ipv4_subnet_mask_example",
+        ipv6_address="ipv6_address_example",
+        ipv6_gateway="ipv6_gateway_example",
+        ipv6_prefix_len="ipv6_prefix_len_example",
+        proxy_params=EditNetworkSettingsInputProxyParams(
+            authentication_required="authentication_required_example",
+            proxy_password="proxy_password_example",
+            proxy_port=1,
+            proxy_protocol="proxy_protocol_example",
+            proxy_server="proxy_server_example",
+            proxy_user="proxy_user_example",
+        ),
+    ) # EditNetworkSettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Post Network-Settings details for a storage system Primera / Alletra 9K
+        api_response = api_instance.network_settings_associate(system_id, edit_network_settings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->network_settings_associate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **edit_network_settings_input** | [**EditNetworkSettingsInput**](EditNetworkSettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **edit_network_settings_input** | [**EditNetworkSettingsInput**](EditNetworkSettingsInput.md)|  |
 
 ### Return type
 
@@ -4057,6 +7106,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4068,37 +7130,73 @@ Create certificate on storage system Primera / Alletra 9K identified by {systemI
 Create certificate on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.create_certificate_input import CreateCertificateInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-create_certificate_input = greenlake-data-services.CreateCertificateInput() # CreateCertificateInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Create certificate on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.post_certificate(system_id, create_certificate_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->post_certificate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    create_certificate_input = CreateCertificateInput(
+        authority_chain="-----BEGIN CERTIFICATE REQUEST-----abc----END CERTIFICATE REQUEST-----",
+        common_name="hpe.com CA - Intermediate",
+        country="IN",
+        days=365,
+        key_length=2048,
+        locality="BLR",
+        organization="HPE",
+        organization_unit="HPE Primera",
+        province="Karnataka",
+        service="QW_CLIENT",
+        subject_alt_name=CertSubjectAltName(
+            dns="7CE815P2BH",
+            ip="15.213.65.129",
+            email="abc@hpe.com",
+        ),
+        type="csr",
+    ) # CreateCertificateInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Create certificate on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.post_certificate(system_id, create_certificate_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->post_certificate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **create_certificate_input** | [**CreateCertificateInput**](CreateCertificateInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **create_certificate_input** | [**CreateCertificateInput**](CreateCertificateInput.md)|  |
 
 ### Return type
 
@@ -4112,6 +7210,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4123,39 +7235,61 @@ Import certificate identified by {id} on storage system Primera / Alletra 9K ide
 Import certificate identified by {id} on storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.import_certificate_input import ImportCertificateInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-id = 'id_example' # str | ID of the certificate
-import_certificate_input = greenlake-data-services.ImportCertificateInput() # ImportCertificateInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Import certificate identified by {id} on storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.put_certificate(system_id, id, import_certificate_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->put_certificate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    id = "99691e493067b2b2acf1774fc0ccc011" # str | ID of the certificate
+    import_certificate_input = ImportCertificateInput(
+        authority_chain="-----BEGIN CERTIFICATE REQUEST-----abc----END CERTIFICATE REQUEST----- \n-----BEGIN CERTIFICATE REQUEST-----pqr----END CERTIFICATE REQUEST-----",
+        certificate="-----BEGIN CERTIFICATE REQUEST-----abc----END CERTIFICATE REQUEST-----",
+    ) # ImportCertificateInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Import certificate identified by {id} on storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.put_certificate(system_id, id, import_certificate_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->put_certificate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **id** | **str**| ID of the certificate | 
- **import_certificate_input** | [**ImportCertificateInput**](ImportCertificateInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **id** | **str**| ID of the certificate |
+ **import_certificate_input** | [**ImportCertificateInput**](ImportCertificateInput.md)|  |
 
 ### Return type
 
@@ -4169,6 +7303,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4180,37 +7328,62 @@ Delete certificates from storage system Primera / Alletra 9K identified by {syst
 Delete certificates from storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.remove_certificates_input import RemoveCertificatesInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-remove_certificates_input = greenlake-data-services.RemoveCertificatesInput() # RemoveCertificatesInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete certificates from storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.remove_certificates(system_id, remove_certificates_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->remove_certificates: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    remove_certificates_input = RemoveCertificatesInput(
+        certificates=[
+            RemoveCertificateInput(
+                certificate="99691e493067b2b2acf1774fc0ccc011",
+            ),
+        ],
+    ) # RemoveCertificatesInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete certificates from storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.remove_certificates(system_id, remove_certificates_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->remove_certificates: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **remove_certificates_input** | [**RemoveCertificatesInput**](RemoveCertificatesInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **remove_certificates_input** | [**RemoveCertificatesInput**](RemoveCertificatesInput.md)|  |
 
 ### Return type
 
@@ -4224,6 +7397,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4235,37 +7421,62 @@ Delete trusted certificates from storage system Primera / Alletra 9K identified 
 Delete trusted certificates from storage system Primera / Alletra 9K identified by {systemId}
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.remove_trusted_certificates_input import RemoveTrustedCertificatesInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-remove_trusted_certificates_input = greenlake-data-services.RemoveTrustedCertificatesInput() # RemoveTrustedCertificatesInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Delete trusted certificates from storage system Primera / Alletra 9K identified by {systemId}
-    api_response = api_instance.remove_trusted_certificates(system_id, remove_trusted_certificates_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->remove_trusted_certificates: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    remove_trusted_certificates_input = RemoveTrustedCertificatesInput(
+        trusted_certificates=[
+            RemoveTrustedCertificateInput(
+                trusted_certificate="99691e493067b2b2acf1774fc0ccc011",
+            ),
+        ],
+    ) # RemoveTrustedCertificatesInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Delete trusted certificates from storage system Primera / Alletra 9K identified by {systemId}
+        api_response = api_instance.remove_trusted_certificates(system_id, remove_trusted_certificates_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->remove_trusted_certificates: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **remove_trusted_certificates_input** | [**RemoveTrustedCertificatesInput**](RemoveTrustedCertificatesInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **remove_trusted_certificates_input** | [**RemoveTrustedCertificatesInput**](RemoveTrustedCertificatesInput.md)|  |
 
 ### Return type
 
@@ -4279,6 +7490,19 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4290,37 +7514,65 @@ Add support settings for a storage system Primera / Alletra 9K
 Add support settings for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
+from greenlake_data_services.model.support_settings_input import SupportSettingsInput
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-support_settings_input = greenlake-data-services.SupportSettingsInput() # SupportSettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Add support settings for a storage system Primera / Alletra 9K
-    api_response = api_instance.support_settings_associate(system_id, support_settings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->support_settings_associate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    support_settings_input = SupportSettingsInput(
+        connect_to_hpe="connect_to_hpe_example",
+        device_id="device_id_example",
+        enterprise_server_url="enterprise_server_url_example",
+        mini_insplore_enabled="mini_insplore_enabled_example",
+        rap_forwarding="rap_forwarding_example",
+        remote_access="DISABLE",
+        rts_enabled="rts_enabled_example",
+    ) # SupportSettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Add support settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.support_settings_associate(system_id, support_settings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->support_settings_associate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **support_settings_input** | [**SupportSettingsInput**](SupportSettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **support_settings_input** | [**SupportSettingsInput**](SupportSettingsInput.md)|  |
 
 ### Return type
 
@@ -4334,6 +7586,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4345,37 +7611,65 @@ Edit support settings for a storage system Primera / Alletra 9K
 Edit support settings for a storage system Primera / Alletra 9K
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.task_response import TaskResponse
+from greenlake_data_services.model.support_settings_input import SupportSettingsInput
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-support_settings_input = greenlake-data-services.SupportSettingsInput() # SupportSettingsInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit support settings for a storage system Primera / Alletra 9K
-    api_response = api_instance.support_settings_update(system_id, support_settings_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->support_settings_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    support_settings_input = SupportSettingsInput(
+        connect_to_hpe="connect_to_hpe_example",
+        device_id="device_id_example",
+        enterprise_server_url="enterprise_server_url_example",
+        mini_insplore_enabled="mini_insplore_enabled_example",
+        rap_forwarding="rap_forwarding_example",
+        remote_access="DISABLE",
+        rts_enabled="rts_enabled_example",
+    ) # SupportSettingsInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit support settings for a storage system Primera / Alletra 9K
+        api_response = api_instance.support_settings_update(system_id, support_settings_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->support_settings_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **support_settings_input** | [**SupportSettingsInput**](SupportSettingsInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **support_settings_input** | [**SupportSettingsInput**](SupportSettingsInput.md)|  |
 
 ### Return type
 
@@ -4389,6 +7683,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4400,37 +7708,88 @@ Edit system settings configuration
 Edit system settings configuration
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.system_config_params_edit_input import SystemConfigParamsEditInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-system_config_params_edit_input = greenlake-data-services.SystemConfigParamsEditInput() # SystemConfigParamsEditInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit system settings configuration
-    api_response = api_instance.system_settings_associate(system_id, system_config_params_edit_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->system_settings_associate: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    system_config_params_edit_input = SystemConfigParamsEditInput(
+        auth_mode=SystemConfigParamsEditInputAuthMode(None),
+        date_time="01/15/2020 10:00:00",
+        installation_sites=SystemConfigParamsEditInputInstallationSites(None),
+        name="Array1",
+        ntp_addresses=[
+            "ntp_addresses_example",
+        ],
+        remote_syslog_settings=SystemConfigParamsEditInputRemoteSyslogSettings(None),
+        srinfo=SystemConfigParamsEditInputSrinfo(None),
+        support_contact=ContactsEditDetails(
+            company="HPE",
+            company_code="HPE",
+            country="US",
+            fax="fax_id",
+            first_name="john",
+            id="67d09515-8526-9b02-c0c4-c1f443a39402",
+            include_svc_alerts=False,
+            last_name="kevin",
+            notification_severities=[0,1,2,3,4,5],
+            preferred_language="en",
+            primary_email="kevin.john@hpe.com",
+            primary_phone="98783456",
+            receive_email=True,
+            receive_grouped=True,
+            secondary_email="winny.pooh@hpe.com",
+            secondary_phone="23456789",
+            system_id="7CE751P312",
+        ),
+        system_parameters=SystemConfigParamsEditInputSystemParameters(None),
+        timezone="Asia/Calcutta",
+    ) # SystemConfigParamsEditInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit system settings configuration
+        api_response = api_instance.system_settings_associate(system_id, system_config_params_edit_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->system_settings_associate: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **system_config_params_edit_input** | [**SystemConfigParamsEditInput**](SystemConfigParamsEditInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **system_config_params_edit_input** | [**SystemConfigParamsEditInput**](SystemConfigParamsEditInput.md)|  |
 
 ### Return type
 
@@ -4444,6 +7803,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4455,37 +7828,88 @@ Edit system settings configuration
 Edit system settings configuration
 
 ### Example
+
+* Bearer (JWT) Authentication (JWTAuth):
+
 ```python
-from __future__ import print_function
 import time
-import greenlake-data-services
-from greenlake-data-services.rest import ApiException
+import greenlake_data_services
+from greenlake_data_services.api import system_settings_api
+from greenlake_data_services.model.error_response import ErrorResponse
+from greenlake_data_services.model.error import Error
+from greenlake_data_services.model.system_config_params_edit_input import SystemConfigParamsEditInput
+from greenlake_data_services.model.task_response import TaskResponse
 from pprint import pprint
+# Defining the host is optional and defaults to https://eu1.data.cloud.hpe.com
+# See configuration.py for a list of all supported configuration parameters.
+configuration = greenlake_data_services.Configuration(
+    host = "https://eu1.data.cloud.hpe.com"
+)
 
-# Configure HTTP basic authorization: JWTAuth
-configuration = greenlake-data-services.Configuration()
-configuration.username = 'YOUR_USERNAME'
-configuration.password = 'YOUR_PASSWORD'
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
 
-# create an instance of the API class
-api_instance = greenlake-data-services.SystemSettingsApi(greenlake-data-services.ApiClient(configuration))
-system_id = 'system_id_example' # str | systemId of the device-type1 storage system
-system_config_params_edit_input = greenlake-data-services.SystemConfigParamsEditInput() # SystemConfigParamsEditInput | 
+# Configure Bearer authorization (JWT): JWTAuth
+configuration = greenlake_data_services.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
 
-try:
-    # Edit system settings configuration
-    api_response = api_instance.system_settings_update(system_id, system_config_params_edit_input)
-    pprint(api_response)
-except ApiException as e:
-    print("Exception when calling SystemSettingsApi->system_settings_update: %s\n" % e)
+# Enter a context with an instance of the API client
+with greenlake_data_services.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = system_settings_api.SystemSettingsApi(api_client)
+    system_id = "7CE751P312" # str | systemId of the device-type1 storage system
+    system_config_params_edit_input = SystemConfigParamsEditInput(
+        auth_mode=SystemConfigParamsEditInputAuthMode(None),
+        date_time="01/15/2020 10:00:00",
+        installation_sites=SystemConfigParamsEditInputInstallationSites(None),
+        name="Array1",
+        ntp_addresses=[
+            "ntp_addresses_example",
+        ],
+        remote_syslog_settings=SystemConfigParamsEditInputRemoteSyslogSettings(None),
+        srinfo=SystemConfigParamsEditInputSrinfo(None),
+        support_contact=ContactsEditDetails(
+            company="HPE",
+            company_code="HPE",
+            country="US",
+            fax="fax_id",
+            first_name="john",
+            id="67d09515-8526-9b02-c0c4-c1f443a39402",
+            include_svc_alerts=False,
+            last_name="kevin",
+            notification_severities=[0,1,2,3,4,5],
+            preferred_language="en",
+            primary_email="kevin.john@hpe.com",
+            primary_phone="98783456",
+            receive_email=True,
+            receive_grouped=True,
+            secondary_email="winny.pooh@hpe.com",
+            secondary_phone="23456789",
+            system_id="7CE751P312",
+        ),
+        system_parameters=SystemConfigParamsEditInputSystemParameters(None),
+        timezone="Asia/Calcutta",
+    ) # SystemConfigParamsEditInput | 
+
+    # example passing only required values which don't have defaults set
+    try:
+        # Edit system settings configuration
+        api_response = api_instance.system_settings_update(system_id, system_config_params_edit_input)
+        pprint(api_response)
+    except greenlake_data_services.ApiException as e:
+        print("Exception when calling SystemSettingsApi->system_settings_update: %s\n" % e)
 ```
+
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **system_id** | **str**| systemId of the device-type1 storage system | 
- **system_config_params_edit_input** | [**SystemConfigParamsEditInput**](SystemConfigParamsEditInput.md)|  | 
+ **system_id** | **str**| systemId of the device-type1 storage system |
+ **system_config_params_edit_input** | [**SystemConfigParamsEditInput**](SystemConfigParamsEditInput.md)|  |
 
 ### Return type
 
@@ -4499,6 +7923,20 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**202** | Accepted |  -  |
+**400** | Bad Request |  -  |
+**401** | Unauthorized |  -  |
+**403** | Forbidden |  -  |
+**404** | Storage system object not found |  -  |
+**500** | Internal / unexpected error |  -  |
+**503** | Appliance in maintenance mode |  -  |
+**0** | unexpected error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
